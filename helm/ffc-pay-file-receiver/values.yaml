@@ -30,6 +30,7 @@ container:
   requestCpu: 200m
   limitMemory: 500Mi
   limitCpu: 500m
+  port: 3000
   messageQueueHost: namespace.servicebus.windows.net
   fileConsumeTopicAddress: ffc-pay-file-consume
   fileConsumeSubscriptionAddress: ffc-pay-file-consumer
