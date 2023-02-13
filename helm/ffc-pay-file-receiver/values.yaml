@@ -21,8 +21,8 @@ containerSecret:
 deployment:
   minReplicas: 1
   maxReplicas: 1
-  cpuThreshold: 100
-  memoryThreshold: 100
+  cpuThreshold: 120
+  memoryThreshold: 120
   minReadySeconds: 0
 
 container:
@@ -53,15 +53,15 @@ azureIdentity:
 livenessProbe:
   path: /healthz
   port: 3000
-  initialDelaySeconds: 20
-  periodSeconds: 10
+  initialDelaySeconds: 30
+  periodSeconds: 50
   failureThreshold: 3
-  timeoutSeconds: 5
+  timeoutSeconds: 20
 
 readinessProbe:
   path: /healthy
   port: 3000
   initialDelaySeconds: 30
-  periodSeconds: 10
-  failureThreshold: 3
-  timeoutSeconds: 5
+  periodSeconds: 50
+  failureThreshold: 5
+  timeoutSeconds: 20
