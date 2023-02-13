@@ -26,10 +26,10 @@ deployment:
   minReadySeconds: 0
 
 container:
-  requestMemory: 100Mi
+  requestMemory: 180Mi
   requestCpu: 100m
   limitMemory: 500Mi
-  limitCpu: 100m
+  limitCpu: 500m
   port: 3000
   messageQueueHost: namespace.servicebus.windows.net
   fileConsumeTopicAddress: ffc-pay-file-consume
