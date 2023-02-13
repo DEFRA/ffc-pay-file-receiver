@@ -1,4 +1,4 @@
-environment: production
+environment: development
 environmentCode:
 name: ffc-pay-file-receiver
 namespace: ffc-pay
@@ -18,12 +18,17 @@ containerSecret:
   name: ffc-pay-file-receiver-container-secret
   type: Opaque
 
-deployment: {}
+deployment:
+  minReplicas: 1
+  maxReplicas: 1
+  cpuThreshold: 80
+  memoryThreshold: 80
+  minReadySeconds: 0
 
 container:
   requestMemory: 100Mi
   requestCpu: 100m
-  limitMemory: 100Mi
+  limitMemory: 500Mi
   limitCpu: 100m
   port: 3000
   messageQueueHost: namespace.servicebus.windows.net
@@ -54,3 +59,9 @@ readinessProbe:
   periodSeconds: 10
   failureThreshold: 3
   timeoutSeconds: 5
+
+aadPodIdentity: true
+
+azureIdentity:
+  clientID: not-a-real-clientID
+  resourceID: not-a-real-resourceID
