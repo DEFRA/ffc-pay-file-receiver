@@ -1,3 +1,5 @@
+
+version: '3.8'
 services:
   ffc-pay-file-receiver:
     command: npm run test:debug

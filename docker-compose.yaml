@@ -8,3 +8,19 @@ services:
     environment:
       APPINSIGHTS_CLOUDROLE: ffc-pay-file-receiver-local
       APPINSIGHTS_INSTRUMENTATIONKEY: ${APPINSIGHTS_INSTRUMENTATIONKEY}
+      MESSAGE_QUEUE_HOST: ${MESSAGE_QUEUE_HOST}
+      MESSAGE_QUEUE_PASSWORD: ${MESSAGE_QUEUE_PASSWORD}
+      MESSAGE_QUEUE_USER: ${MESSAGE_QUEUE_USER}
+      FILECONSUME_TOPIC_ADDRESS: ${PUBLISH_TOPIC_ADDRESS:-ffc-pay-file-consume}${MESSAGE_QUEUE_SUFFIX}
+      FILECONSUME_SUBSCRIPTION_ADDRESS: ${PUBLISH_SUBSCRIPTION_ADDRESS:-ffc-pay-file-consumer}${MESSAGE_QUEUE_SUFFIX}
+      AZURE_STORAGE_BLOB_ACCOUNT_NAME: ${AZURE_STORAGE_ACCOUNT_NAME:-devstoreaccount1}
+      AZURE_STORAGE_SHARE_ACCOUNT_NAME: ${AZURE_STORAGE_ACCOUNT_NAME:-}${AZURE_STORAGE_SHARE_ACCOUNT_NAME}
+      AZURE_STORAGE_BLOB_USE_CONNECTION_STRING: "true"
+      AZURE_STORAGE_SHARE_USE_CONNECTION_STRING: "true"
+      AZURE_STORAGE_SHARE_CONNECTION_STRING: DefaultEndpointsProtocol=https;AccountName=${AZURE_STORAGE_SHARE_ACCOUNT_NAME};AccountKey=${AZURE_STORAGE_SHARE_ACCOUNT_KEY};EndpointSuffix=core.windows.net
+  
+  ffc-pay-file-receiver-azurite:
+    image: mcr.microsoft.com/azure-storage/azurite:3.17.1
+    command: "azurite-blob --loose --blobHost 0.0.0.0"
+    labels:
+      com.docker.compose.pay.role: ffc-pay-file-receiver-azurite

@@ -26,6 +26,18 @@ container:
   limitMemory: 100Mi
   limitCpu: 100m
   port: 3000
+  messageQueueHost: namespace.servicebus.windows.net
+  fileConsumeTopicAddress: ffc-pay-file-consume
+  fileConsumeSubscriptionAddress: ffc-pay-file-consumer
+  azureStorageShareAccountName: ffcpay
+  azureStorageShareUseConnectionString: false
+  azureStorageShareConnectionString: dummy
+  azureStorageBlobAccountName: ffcpay
+  azureStorageBlobUseConnectionString: false
+  azureStorageBlobConnectionString: dummy
+  azureStorageBlobCreateContainers: false
+  storageBlobContainer: dax
+  storageBlobFolder: inbound
 
 livenessProbe:
   path: /healthz

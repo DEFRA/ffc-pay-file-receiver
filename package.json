@@ -17,8 +17,13 @@
   "contributors": [],
   "license": "OGL-UK-3.0",
   "dependencies": {
+    "@azure/identity": "2.1.0",
+    "@azure/storage-blob": "12.10.0",
+    "@azure/storage-file-share": "12.9.0",
     "@hapi/hapi": "20.2.2",
-    "applicationinsights": "2.3.5"
+    "applicationinsights": "2.3.5",
+    "ffc-messaging": "2.5.1",
+    "joi": "17.6.0"
   },
   "devDependencies": {
     "jest": "29.2.2",

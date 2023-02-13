@@ -4,4 +4,21 @@ data:
   NODE_ENV: {{ quote .Values.environment }}
   PORT: {{ quote .Values.container.port }}
   APPINSIGHTS_CLOUDROLE: {{ quote .Values.name }}
+  MESSAGE_QUEUE_HOST: {{ quote .Values.container.messageQueueHost }}
+  {{- if and (.Values.environmentCode) (not .Values.pr) }}
+  FILECONSUME_TOPIC_ADDRESS: {{ .Values.container.fileConsumeTopicAddress }}-{{ .Values.environmentCode }}
+  {{ else }}
+  FILECONSUME_TOPIC_ADDRESS: {{ .Values.container.fileConsumeTopicAddress }}
+  {{- end }}
+  FILECONSUME_SUBSCRIPTION_ADDRESS: {{ quote .Values.container.fileConsumeSubscriptionAddress }}
+  AZURE_STORAGE_SHARE_ACCOUNT_NAME: {{ quote .Values.container.azureStorageShareAccountName }}
+  AZURE_STORAGE_SHARE_USE_CONNECTION_STRING: {{ quote .Values.container.azureStorageShareUseConnectionString }}
+  AZURE_STORAGE_SHARE_CONNECTION_STRING: {{ quote .Values.container.azureStorageShareConnectionString }}
+  AZURE_STORAGE_BLOB_ACCOUNT_NAME: {{ quote .Values.container.azureStorageBlobAccountName }}
+  AZURE_STORAGE_BLOB_CONNECTION_STRING: {{ quote .Values.container.azureStorageBlobConnectionString }}
+  AZURE_STORAGE_BLOB_USE_CONNECTION_STRING: {{ quote .Values.container.azureStorageBlobUseConnectionString }}
+  AZURE_STORAGE_BLOB_CREATE_CONTAINERS: {{ quote .Values.container.azureStorageBlobCreateContainers }}
+  AZURE_STORAGE_BLOB_CONTAINER: {{ quote .Values.container.storageBlobContainer }}
+  AZURE_STORAGE_BLOB_FOLDER: {{ quote .Values.container.storageBlobFolder }}
 {{- end -}}
+

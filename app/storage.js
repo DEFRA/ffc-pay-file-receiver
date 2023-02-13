@@ -1,45 +1,49 @@
 const { DefaultAzureCredential } = require('@azure/identity')
 const { BlobServiceClient } = require('@azure/storage-blob')
 const { ShareServiceClient } = require('@azure/storage-file-share')
-const { config } = require('./config').storageConfig
+const config = require('./config').storageConfig
 
 let blobServiceClient
+let shareServiceClient
 
-if (config.useConnectionStr) {
+if (config.useBlobConnectionStr) {
   console.log('Using connection string for BlobServiceClient')
-  blobServiceClient = BlobServiceClient.fromConnectionString(config.connectionStr)
+  blobServiceClient = BlobServiceClient.fromConnectionString(config.blobConnectionString)
 } else {
   console.log('Using DefaultAzureCredential for BlobServiceClient')
-  const uri = `https://${config.storageAccount}.blob.core.windows.net`
+  const uri = `https://${config.storageBlobAccount}.blob.core.windows.net`
   blobServiceClient = new BlobServiceClient(uri, new DefaultAzureCredential())
 }
 
-const shareServiceClient = ShareServiceClient.fromConnectionString(config.shareConnectionString)
-
-const getFile = async (filePath, shareName) => {
-  const share = shareServiceClient.getShareClient(shareName)
-  console.log(`Searching for ${filePath}`)
-  const file = share.rootDirectoryClient.getFileClient(filePath)
-  const downloaded = await file.downloadToBuffer()
-  console.log(`Found ${filePath}`)
-  return downloaded.toString()
+if (config.useShareConnectionStr) {
+  console.log('Using connection string for ShareServiceClient')
+  shareServiceClient = ShareServiceClient.fromConnectionString(config.shareConnectionString)
+} else {
+  console.log('Using DefaultAzureCredential for ShareServiceClient')
+  const uri = `https://${config.storageShareAccount}.file.core.windows.net`
+  shareServiceClient = new ShareServiceClient(uri, new DefaultAzureCredential())
 }
 
 const container = blobServiceClient.getContainerClient(config.container)
+const inboundFolder = config.inboundFolder
 
-const writeFile = async (fileName, file) => {
-  const blob = container.getBlockBlobClient(`${config.inboundFolder}/${fileName}`)
-  await blob.upload(file, file.length)
+const initialiseContainers = async () => {
+  if (config.createContainers) {
+    console.log('Making sure blob containers exist')
+    await container.createIfNotExists()
+  }
+  await initialiseFolders()
 }
 
-const deleteFile = async (filePath, shareName) => {
-  const share = shareServiceClient.getShareClient(shareName)
-  const file = share.rootDirectoryClient.getFileClient(filePath)
-  await file.delete()
+const initialiseFolders = async () => {
+  const placeHolderText = 'Placeholder'
+  const client = container.getBlockBlobClient(`${config.inboundFolder}/default.txt`)
+  await client.upload(placeHolderText, placeHolderText.length)
 }
 
 module.exports = {
-  getFile,
-  writeFile,
-  deleteFile
+  container,
+  inboundFolder,
+  shareServiceClient,
+  initialiseContainers
 }
