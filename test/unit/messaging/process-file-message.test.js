@@ -11,7 +11,7 @@ const processFileMessage = require('../../../app/messaging/process-file-message'
 const { VALIDATION } = require('../../../app/errors')
 
 const mockParsedMessage = require('../../mocks/parsed-message')
-const mockTransferMessage = require('../../mocks/transfer-message')
+const mockTransferMessage = require('../../mocks/transferred-message')
 
 let receiver
 let message
