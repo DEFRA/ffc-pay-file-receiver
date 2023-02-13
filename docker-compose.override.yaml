@@ -15,7 +15,7 @@ services:
       - ./package.json:/home/node/package.json
     environment:
       AZURE_STORAGE_BLOB_CONNECTION_STRING: DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://ffc-pay-file-receiver-azurite:10000/devstoreaccount1;
-
+      AZURE_STORAGE_SHARE_CONNECTION_STRING: DefaultEndpointsProtocol=https;AccountName=sndffcpayst1001;AccountKey=pj8pBBqhyI7AgObeteNANBz8KbhplfnnLXHzFYMHrxPEJschL77tFCyWt8VKCgZUnBIm7S5xeAB2+AStBSPkGg==;EndpointSuffix=core.windows.net
   ffc-pay-file-receiver-azurite:
     volumes:
       - azurite_data:/data
