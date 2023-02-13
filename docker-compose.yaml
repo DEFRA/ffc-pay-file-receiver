@@ -14,10 +14,10 @@ services:
       FILECONSUME_TOPIC_ADDRESS: ${PUBLISH_TOPIC_ADDRESS:-ffc-pay-file-consume}${MESSAGE_QUEUE_SUFFIX}
       FILECONSUME_SUBSCRIPTION_ADDRESS: ${PUBLISH_SUBSCRIPTION_ADDRESS:-ffc-pay-file-consumer}${MESSAGE_QUEUE_SUFFIX}
       AZURE_STORAGE_BLOB_ACCOUNT_NAME: ${AZURE_STORAGE_ACCOUNT_NAME:-devstoreaccount1}
-      AZURE_STORAGE_SHARE_ACCOUNT_NAME: ${AZURE_STORAGE_ACCOUNT_NAME:-devstoreaccount1}
+      AZURE_STORAGE_SHARE_ACCOUNT_NAME: ${AZURE_STORAGE_ACCOUNT_NAME:-}${AZURE_STORAGE_SHARE_ACCOUNT_NAME}
       AZURE_STORAGE_BLOB_USE_CONNECTION_STRING: "true"
       AZURE_STORAGE_SHARE_USE_CONNECTION_STRING: "true"
-      AZURE_STORAGE_SHARE_CONNECTION_STRING: DefaultEndpointsProtocol=https;AccountName=;AccountKey=;EndpointSuffix=core.windows.net
+      AZURE_STORAGE_SHARE_CONNECTION_STRING: DefaultEndpointsProtocol=https;AccountName=${AZURE_STORAGE_SHARE_ACCOUNT_NAME};AccountKey=AccountKey=${AZURE_STORAGE_SHARE_ACCOUNT_KEY};EndpointSuffix=core.windows.net
   
   ffc-pay-file-receiver-azurite:
     image: mcr.microsoft.com/azure-storage/azurite:3.17.1

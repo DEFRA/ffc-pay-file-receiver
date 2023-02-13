@@ -5,11 +5,8 @@ ignore:
   SNYK-JS-NODEFETCH-2964180:
     - '@azure/storage-blob > @azure/core-http > node-fetch':
         reason: None given
-        expires: '2024-08-31T12:46:12.897Z'
-    - '@azure/identity > @azure/core-http > node-fetch':
-        reason: None given
-        expires: '2024-08-31T12:46:12.897Z'
+        expires: '2023-08-31T12:46:12.897Z'
     - applicationinsights > @azure/core-http > node-fetch:
         reason: None given
-        expires: '2024-08-31T12:46:12.897Z'
+        expires: '2023-08-31T12:46:12.897Z'
 patch: {}

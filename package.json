@@ -1,6 +1,6 @@
 {
   "name": "ffc-pay-file-receiver",
-  "version": "0.1.1",
+  "version": "1.1.1",
   "description": "Transfer files from DAX",
   "homepage": "https://github.com/DEFRA/ffc-pay-file-receiver",
   "main": "app/index.js",
@@ -21,16 +21,16 @@
   "dependencies": {
     "@azure/identity": "2.0.5",
     "@azure/storage-blob": "12.10.0",
+    "@azure/storage-file-share": "12.9.0",
     "@hapi/hapi": "20.2.2",
-    "applicationinsights": "2.3.5",
-    "ffc-messaging": "2.5.1",
-    "joi": "17.6.0",
-    "url-parse": "^1.5.10"
+    "applicationinsights": "2.3.3",
+    "ffc-messaging": "2.6.1",
+    "joi": "17.6.0"
   },
   "devDependencies": {
-    "jest": "29.2.2",
+    "jest": "29.3.0",
     "jest-junit": "14.0.1",
-    "nodemon": "2.0.20",
+    "nodemon": "2.0.19",
     "standard": "17.0.0"
   },
   "standard": {
