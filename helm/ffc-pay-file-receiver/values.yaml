@@ -26,8 +26,8 @@ deployment:
   minReadySeconds: 0
 
 container:
-  requestMemory: 180Mi
-  requestCpu: 100m
+  requestMemory: 200Mi
+  requestCpu: 200m
   limitMemory: 500Mi
   limitCpu: 500m
   messageQueueHost: namespace.servicebus.windows.net
