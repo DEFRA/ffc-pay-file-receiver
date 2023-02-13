@@ -68,7 +68,7 @@ describe('Validate file request message', () => {
       expect(wrapper).toThrow(Error)
     })
 
-    test('should throw error which starts "Invalid CRM details"', async () => {
+    test('should throw error which starts "Message content is invalid"', async () => {
       const wrapper = () => { validateMessage(message) }
       expect(wrapper).toThrow(/^Message content is invalid/)
     })
