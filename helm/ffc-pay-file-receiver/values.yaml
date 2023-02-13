@@ -30,7 +30,6 @@ container:
   requestCpu: 100m
   limitMemory: 500Mi
   limitCpu: 500m
-  port: 3000
   messageQueueHost: namespace.servicebus.windows.net
   fileConsumeTopicAddress: ffc-pay-file-consume
   fileConsumeSubscriptionAddress: ffc-pay-file-consumer
@@ -43,22 +42,6 @@ container:
   azureStorageBlobCreateContainers: false
   storageBlobContainer: dax
   storageBlobFolder: inbound
-
-livenessProbe:
-  path: /healthz
-  port: 3000
-  initialDelaySeconds: 20
-  periodSeconds: 10
-  failureThreshold: 3
-  timeoutSeconds: 5
-
-readinessProbe:
-  path: /healthy
-  port: 3000
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  failureThreshold: 3
-  timeoutSeconds: 5
 
 aadPodIdentity: true
 
