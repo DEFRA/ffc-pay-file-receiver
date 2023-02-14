@@ -21,25 +21,21 @@ containerSecret:
 deployment:
   minReplicas: 1
   maxReplicas: 1
-  cpuThreshold: 120
-  memoryThreshold: 120
+  cpuThreshold: 80
+  memoryThreshold: 80
   minReadySeconds: 0
 
 container:
-  requestMemory: 200Mi
-  requestCpu: 200m
+  requestMemory: 120Mi
+  requestCpu: 120m
   limitMemory: 500Mi
   limitCpu: 500m
   port: 3000
   messageQueueHost: namespace.servicebus.windows.net
   fileConsumeTopicAddress: ffc-pay-file-consume
   fileConsumeSubscriptionAddress: ffc-pay-file-consumer
-  azureStorageShareAccountName: ffcpay
   azureStorageShareUseConnectionString: false
-  azureStorageShareConnectionString: dummy
-  azureStorageBlobAccountName: ffcpay
   azureStorageBlobUseConnectionString: false
-  azureStorageBlobConnectionString: dummy
   azureStorageBlobCreateContainers: false
   storageBlobContainer: dax
   storageBlobFolder: inbound
