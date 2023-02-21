@@ -1,3 +1,6 @@
+jest.mock('../../../app/config/get-storage-config')
+const getStorageConfig = require('../../../app/config/get-storage-config')
+
 jest.mock('../../../app/processing/delete-file')
 const deleteFile = require('../../../app/processing/delete-file')
 
@@ -9,11 +12,14 @@ const writeFile = require('../../../app/processing/write-file')
 
 const transferFile = require('../../../app/processing/transfer-file')
 
+const mockStorageConfig = require('../../mocks/storage-config')
+
 const mockParsedMessage = require('../../mocks/parsed-message')
 const { fileName, directoryName, shareName } = mockParsedMessage
 
 describe('Process transfer file', () => {
   beforeEach(() => {
+    getStorageConfig.mockResolvedValue(mockStorageConfig)
   })
 
   afterEach(() => {

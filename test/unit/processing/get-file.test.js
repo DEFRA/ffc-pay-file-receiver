@@ -1,40 +1,37 @@
-jest.mock('@azure/storage-file-share', () => {
+jest.mock('../../../app/config/get-storage-config')
+const getStorageConfig = require('../../../app/config/get-storage-config')
+const mockFileContent = 'payment details'
+const mockStorageConfig = require('../../mocks/storage-config')
+const mockDelete = jest.fn()
+
+const mockGetFileClient = {
+  download: jest.fn().mockResolvedValue({ readableStreamBody: mockFileContent }),
+  delete: mockDelete
+}
+const mockGetDirectoryClient = {
+  getFileClient: jest.fn().mockReturnValue(mockGetFileClient)
+}
+const mockGetShareClient = {
+  getDirectoryClient: jest.fn().mockReturnValue(mockGetDirectoryClient)
+}
+
+const mockGetShareSeviceClient = {
+  getShareClient: jest.fn().mockReturnValue(mockGetShareClient)
+}
+
+jest.mock('../../../app/storage', () => {
   return {
-    ShareServiceClient: {
-      fromConnectionString: jest.fn().mockImplementation(() => {
-        return {
-          getShareClient: jest.fn().mockImplementation(() => {
-            return {
-              getDirectoryClient: jest.fn().mockImplementation(() => {
-                return {
-                  getFileClient: jest.fn().mockImplementation(() => {
-                    return {
-                      download: mockDownload
-                    }
-                  })
-                }
-              })
-            }
-          })
-        }
-      })
-    }
+    getShareSeviceClient: jest.fn().mockReturnValue(mockGetShareSeviceClient)
   }
 })
-
 const getFile = require('../../../app/processing/get-file')
 
 const mockParsedMessage = require('../../mocks/parsed-message')
 const { fileName, directoryName, shareName } = mockParsedMessage
-const fileContent = 'payment details'
-
-let mockDownload
 
 describe('Process file from storage share file', () => {
   beforeEach(() => {
-    mockDownload = jest.fn().mockReturnValue({
-      readableStreamBody: fileContent
-    })
+    getStorageConfig.mockReturnValue(mockStorageConfig)
   })
 
   afterEach(() => {
@@ -47,7 +44,7 @@ describe('Process file from storage share file', () => {
 
     test('confirm file is downloaded', async () => {
       const file = await getFile(fileName, directoryName, shareName)
-      expect(file).toBe(fileContent)
+      expect(file).toBe(mockFileContent)
     })
   })
 })

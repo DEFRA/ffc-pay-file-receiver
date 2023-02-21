@@ -2,7 +2,6 @@
 {{- define "ffc-pay-file-receiver.config-map" -}}
 data:
   NODE_ENV: {{ quote .Values.environment }}
-  PORT: {{ quote .Values.container.port }}
   APPINSIGHTS_CLOUDROLE: {{ quote .Values.name }}
   MESSAGE_QUEUE_HOST: {{ quote .Values.container.messageQueueHost }}
   {{- if and (.Values.environmentCode) (not .Values.pr) }}
@@ -16,5 +15,6 @@ data:
   AZURE_STORAGE_BLOB_CREATE_CONTAINERS: {{ quote .Values.container.azureStorageBlobCreateContainers }}
   AZURE_STORAGE_BLOB_CONTAINER: {{ quote .Values.container.storageBlobContainer }}
   AZURE_STORAGE_BLOB_FOLDER: {{ quote .Values.container.storageBlobFolder }}
+  TOTAL_RETRIES: {{ quote .Values.container.totalRetries }}
+  RETRY_INTERVAL: {{ quote .Values.container.retryInterval }}
 {{- end -}}
-

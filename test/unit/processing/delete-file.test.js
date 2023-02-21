@@ -1,24 +1,25 @@
-jest.mock('@azure/storage-file-share', () => {
+jest.mock('../../../app/config/get-storage-config')
+const getStorageConfig = require('../../../app/config/get-storage-config')
+
+const mockStorageConfig = require('../../mocks/storage-config')
+const mockDelete = jest.fn()
+const mockGetFileClient = {
+  delete: mockDelete
+}
+const mockGetDirectoryClient = {
+  getFileClient: jest.fn().mockReturnValue(mockGetFileClient)
+}
+const mockGetShareClient = {
+  getDirectoryClient: jest.fn().mockReturnValue(mockGetDirectoryClient)
+}
+
+const mockGetShareSeviceClient = {
+  getShareClient: jest.fn().mockReturnValue(mockGetShareClient)
+}
+
+jest.mock('../../../app/storage', () => {
   return {
-    ShareServiceClient: {
-      fromConnectionString: jest.fn().mockImplementation(() => {
-        return {
-          getShareClient: jest.fn().mockImplementation(() => {
-            return {
-              getDirectoryClient: jest.fn().mockImplementation(() => {
-                return {
-                  getFileClient: jest.fn().mockImplementation(() => {
-                    return {
-                      delete: mockDeleteAction
-                    }
-                  })
-                }
-              })
-            }
-          })
-        }
-      })
-    }
+    getShareSeviceClient: jest.fn().mockReturnValue(mockGetShareSeviceClient)
   }
 })
 
@@ -27,11 +28,9 @@ const deleteFile = require('../../../app/processing/delete-file')
 const mockParsedMessage = require('../../mocks/parsed-message')
 const { fileName, directoryName, shareName } = mockParsedMessage
 
-let mockDeleteAction
-
 describe('Process file from storage share file', () => {
   beforeEach(() => {
-    mockDeleteAction = jest.fn()
+    getStorageConfig.mockReturnValue(mockStorageConfig)
   })
 
   afterEach(() => {
@@ -44,7 +43,8 @@ describe('Process file from storage share file', () => {
 
     test('confirm file is deleted', async () => {
       await deleteFile(fileName, directoryName, shareName)
-      expect(mockDeleteAction).toHaveBeenCalled()
+
+      expect(mockDelete).toHaveBeenCalled()
     })
   })
 })

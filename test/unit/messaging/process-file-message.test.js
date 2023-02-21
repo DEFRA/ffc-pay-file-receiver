@@ -1,3 +1,6 @@
+jest.mock('../../../app/config/get-storage-config')
+const getStorageConfig = require('../../../app/config/get-storage-config')
+
 jest.mock('../../../app/messaging/validate-message')
 const validateMessage = require('../../../app/messaging/validate-message')
 
@@ -12,6 +15,7 @@ const { VALIDATION } = require('../../../app/errors')
 
 const mockParsedMessage = require('../../mocks/parsed-message')
 const mockTransferMessage = require('../../mocks/transferred-message')
+const mockStorageConfig = require('../../mocks/storage-config')
 
 let receiver
 let message
@@ -23,6 +27,7 @@ describe('Process file message', () => {
       deadLetterMessage: jest.fn()
     }
     parseMessage.mockResolvedValue(mockParsedMessage)
+    getStorageConfig.mockReturnValue(mockStorageConfig)
     transferFile.mockResolvedValue(undefined)
     validateMessage.mockReturnValue({ value: 'a' })
   })

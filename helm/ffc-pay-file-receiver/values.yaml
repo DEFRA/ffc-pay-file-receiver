@@ -1,4 +1,4 @@
-environment: development
+environment: production
 environmentCode:
 name: ffc-pay-file-receiver
 namespace: ffc-pay
@@ -26,38 +26,24 @@ deployment:
   minReadySeconds: 0
 
 container:
-  requestMemory: 120Mi
+  requestMemory: 150Mi
   requestCpu: 120m
-  limitMemory: 500Mi
-  limitCpu: 500m
-  port: 3000
+  limitMemory: 150Mi
+  limitCpu: 120m
   messageQueueHost: namespace.servicebus.windows.net
   fileConsumeTopicAddress: ffc-pay-file-consume
   fileConsumeSubscriptionAddress: ffc-pay-file-consumer
-  azureStorageShareUseConnectionString: false
+  azureStorageShareUseConnectionString: true
+  azureStorageShareConnectionString:
   azureStorageBlobUseConnectionString: false
   azureStorageBlobCreateContainers: false
   storageBlobContainer: dax
   storageBlobFolder: inbound
+  totalRetries: 10
+  retryInterval: 1000
 
 aadPodIdentity: true
 
 azureIdentity:
   clientID: not-a-real-clientID
   resourceID: not-a-real-resourceID
-
-livenessProbe:
-  path: /healthz
-  port: 3000
-  initialDelaySeconds: 30
-  periodSeconds: 50
-  failureThreshold: 3
-  timeoutSeconds: 20
-
-readinessProbe:
-  path: /healthy
-  port: 3000
-  initialDelaySeconds: 30
-  periodSeconds: 50
-  failureThreshold: 5
-  timeoutSeconds: 20

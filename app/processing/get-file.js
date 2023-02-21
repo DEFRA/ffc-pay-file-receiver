@@ -1,4 +1,4 @@
-const { shareServiceClient } = require('../storage')
+const storage = require('../storage')
 const retry = require('../retry')
 
 const getFile = async (fileName, directoryName, shareName) => {
@@ -6,6 +6,7 @@ const getFile = async (fileName, directoryName, shareName) => {
 }
 
 const download = async (fileName, directoryName, shareName) => {
+  const shareServiceClient = await storage.getShareSeviceClient()
   const share = shareServiceClient.getShareClient(shareName)
   const directory = share.getDirectoryClient(directoryName)
   const file = directory.getFileClient(fileName)

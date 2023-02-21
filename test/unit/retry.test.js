@@ -1,9 +1,14 @@
+jest.mock('../../app/config/get-storage-config')
+const getStorageConfig = require('../../app/config/get-storage-config')
+
+const mockStorageConfig = require('../mocks/storage-config')
 const retry = require('../../app/retry')
 let mockFunction
 
 describe('retry', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    getStorageConfig.mockReturnValue(mockStorageConfig)
     mockFunction = jest.fn().mockResolvedValue('success')
   })
 

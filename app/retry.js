@@ -1,6 +1,6 @@
-const { totalRetries } = require('./config')
+const { totalRetries, retryInterval } = require('./config')
 
-async function retry (fn, retriesLeft = totalRetries, interval = 1000, exponential = true) {
+async function retry (fn, retriesLeft = totalRetries, interval = retryInterval, exponential = true) {
   try {
     return (await fn())
   } catch (err) {

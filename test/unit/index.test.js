@@ -1,11 +1,17 @@
+jest.mock('../../app/config/get-storage-config')
+const getStorageConfig = require('../../app/config/get-storage-config')
+
 jest.mock('../../app/messaging')
 const mockMessaging = require('../../app/messaging')
 
-jest.mock('../../app//storage')
+jest.mock('../../app/storage')
 const storage = require('../../app/storage')
+
+const mockStorageConfig = require('../mocks/storage-config')
 
 describe('app', () => {
   beforeEach(() => {
+    getStorageConfig.mockReturnValue(mockStorageConfig)
     require('../../app')
   })
 

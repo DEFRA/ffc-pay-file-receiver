@@ -1,3 +1,8 @@
+jest.mock('../../app/config/get-storage-config')
+const getStorageConfig = require('../../app/config/get-storage-config')
+
+const mockStorageConfig = require('../mocks/storage-config')
+
 describe('Application Insights', () => {
   const DEFAULT_ENV = process.env
   let applicationInsights
@@ -5,6 +10,7 @@ describe('Application Insights', () => {
   beforeEach(() => {
     // important to clear the cache when mocking environment variables
     jest.resetModules()
+    getStorageConfig.mockReturnValue(mockStorageConfig)
     jest.mock('applicationinsights', () => {
       return {
         setup: jest.fn().mockReturnThis(),
