@@ -4,6 +4,7 @@ const getStorageConfig = require('../config/get-storage-config')
 
 const getShareLocation = async () => {
   const storageConfig = getStorageConfig()
+  console.log(storageConfig)
   if (storageConfig.useShareConnectionStr) {
     console.log('Using connection string for ShareServiceClient')
     const shareServiceClient = ShareServiceClient.fromConnectionString(storageConfig.shareConnectionString)
