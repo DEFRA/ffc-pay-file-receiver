@@ -36,10 +36,10 @@ container:
   azureStorageShareUseConnectionString: true
   azureStorageConnectionString: dummy
   daxStorageConnectionString:
-  azureStorageBlobUseConnectionString: false
+  azureStorageUseConnectionString: false
   azureStorageBlobCreateContainers: false
-  storageBlobContainer: dax
-  storageBlobFolder: inbound
+  storageContainer: dax
+  storageFolder: inbound
   totalRetries: 10
   retryInterval: 1000
 
