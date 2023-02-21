@@ -1,0 +1,20 @@
+asyncapi: 2.2.0
+info:
+  title: FFC Pay File Receiver
+  version: '1.0.0'
+components:
+  messages:
+    ConsumeRequest:
+      contentType: application/json
+      payload:
+        type: object
+        properties:
+          AzureFileShare:
+            type: string
+            description: Azure File Share storage name
+          OutputFileName:
+            type: string
+            description: Name of file to transfer from DAX
+          ProcessingLocation:
+            type: string
+            description: Network share path to folder containing file
