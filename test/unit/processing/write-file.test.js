@@ -32,11 +32,11 @@ describe('Process file from storage share file', () => {
     jest.resetAllMocks()
   })
 
-  describe('Search and delete file', () => {
+  describe('Upload file', () => {
     beforeEach(() => {
     })
 
-    test('confirm file is deleted', async () => {
+    test('confirm file is uploaded', async () => {
       await writeFile(fileName, directoryName, shareName)
 
       expect(mockUpload).toHaveBeenCalled()
