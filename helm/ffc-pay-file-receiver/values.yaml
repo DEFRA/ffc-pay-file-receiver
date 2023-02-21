@@ -37,6 +37,7 @@ container:
   azureStorageConnectionString: dummy
   azureStorageAccountName: dummy
   daxStorageConnectionString:
+  daxStorageUseConnectionString: true
   azureStorageUseConnectionString: false
   azureStorageCreateContainers: false
   storageContainer: dax

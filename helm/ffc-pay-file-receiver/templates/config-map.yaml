@@ -10,7 +10,7 @@ data:
   FILECONSUME_TOPIC_ADDRESS: {{ .Values.container.fileConsumeTopicAddress }}
   {{- end }}
   FILECONSUME_SUBSCRIPTION_ADDRESS: {{ quote .Values.container.fileConsumeSubscriptionAddress }}
-  AZURE_STORAGE_SHARE_USE_CONNECTION_STRING: {{ quote .Values.container.azureStorageUseConnectionString }}
+  AZURE_STORAGE_SHARE_USE_CONNECTION_STRING: {{ quote .Values.container.daxStorageUseConnectionString }}
   AZURE_STORAGE_BLOB_USE_CONNECTION_STRING: {{ quote .Values.container.azureStorageUseConnectionString }}
   AZURE_STORAGE_BLOB_CREATE_CONTAINERS: {{ quote .Values.container.azureStorageCreateContainers }}
   AZURE_STORAGE_BLOB_CONNECTION_STRING: {{ quote .Values.container.azureStorageConnectionString }}
