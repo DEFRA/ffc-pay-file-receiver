@@ -1,19 +1,13 @@
 const { DefaultAzureCredential } = require('@azure/identity')
-const { BlobServiceClient } = require('@azure/storage-blob')
 const { ShareServiceClient } = require('@azure/storage-file-share')
 const getStorageConfig = require('./config/get-storage-config')
-
-// const container = blobServiceClient.getContainerClient(storageConfig.container)
-const getInboundFolder = () => {
-  const storageConfig = getStorageConfig()
-  return storageConfig.inboundFolder
-}
+const getContainer = require('./storage/get-container')
 
 const initialiseContainers = async () => {
   const storageConfig = getStorageConfig()
   if (storageConfig.createContainers) {
     console.log('Making sure blob containers exist')
-    const container = await getContainer()
+    const container = await getContainer.getContainer()
     await container.createIfNotExists()
   }
   await initialiseFolders()
@@ -21,7 +15,7 @@ const initialiseContainers = async () => {
 
 const initialiseFolders = async () => {
   const storageConfig = getStorageConfig()
-  const container = await getContainer()
+  const container = await getContainer.getContainer()
   const placeHolderText = 'Placeholder'
   const client = container.getBlockBlobClient(`${storageConfig.inboundFolder}/default.txt`)
   await client.upload(placeHolderText, placeHolderText.length)
@@ -41,23 +35,7 @@ const getShareSeviceClient = async () => {
   }
 }
 
-const getContainer = async () => {
-  const storageConfig = getStorageConfig()
-  if (storageConfig.useBlobConnectionStr) {
-    console.log('Using connection string for BlobServiceClient')
-    const blobServiceClient = BlobServiceClient.fromConnectionString(storageConfig.blobConnectionString)
-    return blobServiceClient.getContainerClient(storageConfig.container)
-  } else {
-    console.log('Using DefaultAzureCredential for BlobServiceClient')
-    const uri = `https://${storageConfig.storageBlobAccount}.blob.core.windows.net`
-    const blobServiceClient = new BlobServiceClient(uri, new DefaultAzureCredential())
-    return blobServiceClient.getContainerClient(storageConfig.container)
-  }
-}
-
 module.exports = {
-  getInboundFolder,
-  getContainer,
   getShareSeviceClient,
   initialiseContainers
 }

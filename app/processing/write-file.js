@@ -1,8 +1,9 @@
-const storage = require('../storage')
+const getContainer = require('../storage/get-container')
+const getInboundFolder = require('../storage/get-inbound-folder')
 
 const writeFile = async (fileName, file) => {
-  const container = await storage.getContainer()
-  const inboundFolder = storage.getInboundFolder()
+  const container = await getContainer.getContainer()
+  const inboundFolder = getInboundFolder()
   const blob = container.getBlockBlobClient(`${inboundFolder}/${fileName}`)
   const fileString = file.toString()
   await blob.upload(fileString, fileString.length)
