@@ -4,7 +4,7 @@ const { getShareLocation } = require('../../../app/storage/get-share-location')
 
 let retreivedGetStorageConfig
 
-describe('get and transform payment request information for building a statement object', () => {
+describe('get shared location object', () => {
   beforeEach(() => {
     retreivedGetStorageConfig = JSON.parse(JSON.stringify(require('../../mocks/storage-config')))
     getStorageConfig.mockResolvedValue(retreivedGetStorageConfig)

@@ -4,7 +4,7 @@ const { getContainer } = require('../../../app/storage/get-container')
 
 let retreivedGetStorageConfig
 
-describe('get and transform payment request information for building a statement object', () => {
+describe('get container object', () => {
   beforeEach(() => {
     retreivedGetStorageConfig = JSON.parse(JSON.stringify(require('../../mocks/storage-config')))
     getStorageConfig.mockResolvedValue(retreivedGetStorageConfig)

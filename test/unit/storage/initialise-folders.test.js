@@ -6,7 +6,7 @@ const { initialiseFolders } = require('../../../app/storage/initialise-folders')
 
 let retreivedGetStorageConfig
 
-describe('get and transform payment request information for building a statement object', () => {
+describe('initialise folder object', () => {
   beforeEach(() => {
     retreivedGetStorageConfig = JSON.parse(JSON.stringify(require('../../mocks/storage-config')))
     getStorageConfig.mockResolvedValue(retreivedGetStorageConfig)
