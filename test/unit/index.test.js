@@ -4,8 +4,8 @@ const getStorageConfig = require('../../app/config/get-storage-config')
 jest.mock('../../app/messaging')
 const mockMessaging = require('../../app/messaging')
 
-jest.mock('../../app/storage')
-const storage = require('../../app/storage')
+jest.mock('../../app/storage/initialize-container')
+const storage = require('../../app/storage/initialize-container')
 
 const mockStorageConfig = require('../mocks/storage-config')
 

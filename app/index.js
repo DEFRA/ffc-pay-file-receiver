@@ -1,6 +1,6 @@
 require('./insights').setup()
 const messaging = require('./messaging')
-const { initialiseContainers } = require('./storage')
+const { initialiseContainers } = require('./storage/initialize-container')
 
 process.on('SIGTERM', async () => {
   await messaging.stop()

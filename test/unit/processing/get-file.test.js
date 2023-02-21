@@ -19,9 +19,9 @@ const mockGetShareSeviceClient = {
   getShareClient: jest.fn().mockReturnValue(mockGetShareClient)
 }
 
-jest.mock('../../../app/storage', () => {
+jest.mock('../../../app/storage/get-share-location', () => {
   return {
-    getShareSeviceClient: jest.fn().mockReturnValue(mockGetShareSeviceClient)
+    getShareLocation: jest.fn().mockReturnValue(mockGetShareSeviceClient)
   }
 })
 const getFile = require('../../../app/processing/get-file')

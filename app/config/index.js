@@ -23,7 +23,6 @@ if (result.error) {
 }
 
 const value = result.value
-
 const storageConfig = getStorageConfig()
 
 value.isDev = value.env === 'development'
