@@ -18,4 +18,6 @@ data:
   AZURE_STORAGE_BLOB_FOLDER: {{ quote .Values.container.storageFolder }}
   TOTAL_RETRIES: {{ quote .Values.container.totalRetries }}
   RETRY_INTERVAL: {{ quote .Values.container.retryInterval }}
+  AZURE_STORAGE_BLOB_ACCOUNT_NAME: {{ quote .Values.container.azureStorageAccountName }}
+  AZURE_STORAGE_SHARE_ACCOUNT_NAME: {{ quote .Values.container.azureStorageAccountName }}
 {{- end -}}

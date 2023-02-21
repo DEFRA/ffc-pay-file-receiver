@@ -35,6 +35,7 @@ container:
   fileConsumeSubscriptionAddress: ffc-pay-file-consumer
   azureStorageShareUseConnectionString: true
   azureStorageConnectionString: dummy
+  azureStorageAccountName: dummy
   daxStorageConnectionString:
   azureStorageUseConnectionString: false
   azureStorageCreateContainers: false
