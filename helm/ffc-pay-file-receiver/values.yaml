@@ -37,7 +37,7 @@ container:
   azureStorageConnectionString: dummy
   daxStorageConnectionString:
   azureStorageUseConnectionString: false
-  azureStorageBlobCreateContainers: false
+  azureStorageCreateContainers: false
   storageContainer: dax
   storageFolder: inbound
   totalRetries: 10
