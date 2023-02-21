@@ -2,7 +2,6 @@ const { DefaultAzureCredential } = require('@azure/identity')
 const { BlobServiceClient } = require('@azure/storage-blob')
 const getStorageConfig = require('../config/get-storage-config')
 
-let blobServiceClient
 const getContainer = async () => {
   const storageConfig = getStorageConfig()
   if (storageConfig.useBlobConnectionStr) {
