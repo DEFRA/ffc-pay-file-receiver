@@ -34,6 +34,7 @@ container:
   fileConsumeTopicAddress: ffc-pay-file-consume
   fileConsumeSubscriptionAddress: ffc-pay-file-consumer
   azureStorageShareUseConnectionString: true
+  azureStorageConnectionString: dummy
   daxStorageConnectionString:
   azureStorageBlobUseConnectionString: false
   azureStorageBlobCreateContainers: false
