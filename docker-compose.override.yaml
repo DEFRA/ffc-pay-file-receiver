@@ -7,6 +7,8 @@ services:
       target: development
     image: ffc-pay-file-receiver-development
     container_name: ffc-pay-file-receiver-development
+    ports:
+      - "9254:9229"
     volumes:
       - ./app:/home/node/app
       - ./package.json:/home/node/package.json
@@ -19,7 +21,7 @@ services:
     volumes:
       - azurite_data:/data
     ports:
-      - "10073:10000"
+      - "10074:10000"
 
 volumes:
   azurite_data:
