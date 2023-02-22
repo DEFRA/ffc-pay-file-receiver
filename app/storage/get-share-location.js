@@ -3,7 +3,7 @@ const { ShareServiceClient } = require('@azure/storage-file-share')
 const getStorageConfig = require('../config/get-storage-config')
 
 const getShareLocation = async () => {
-  const storageConfig = getStorageConfig()
+  const storageConfig = await getStorageConfig()
   if (storageConfig.useShareConnectionStr) {
     console.log('Using connection string for ShareServiceClient')
     const shareServiceClient = ShareServiceClient.fromConnectionString(storageConfig.shareConnectionString)

@@ -3,7 +3,7 @@ const { BlobServiceClient } = require('@azure/storage-blob')
 const getStorageConfig = require('../config/get-storage-config')
 
 const getContainer = async () => {
-  const storageConfig = getStorageConfig()
+  const storageConfig = await getStorageConfig()
   if (storageConfig.useBlobConnectionStr) {
     console.log('Using connection string for BlobServiceClient')
     const blobServiceClient = BlobServiceClient.fromConnectionString(storageConfig.blobConnectionString)

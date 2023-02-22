@@ -1,6 +1,6 @@
 const validateStorageConfig = require('./validation/validate-storage-config')
 
-const getStorageConfig = () => {
+const getStorageConfig = async () => {
   const config = {
     storageBlobAccount: process.env.AZURE_STORAGE_BLOB_ACCOUNT_NAME,
     storageShareAccount: process.env.AZURE_STORAGE_SHARE_ACCOUNT_NAME,

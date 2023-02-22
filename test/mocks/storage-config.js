@@ -7,5 +7,5 @@ module.exports = {
   inboundFolder: 'inbound',
   useBlobConnectionStr: false,
   useShareConnectionStr: false,
-  createContainers: true
+  createContainers: false
 }

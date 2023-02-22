@@ -1,7 +1,7 @@
 const getStorageConfig = require('../config/get-storage-config')
 
-const getInboundFolder = () => {
-  const storageConfig = getStorageConfig()
+const getInboundFolder = async () => {
+  const storageConfig = await getStorageConfig()
   return storageConfig.inboundFolder
 }
 
