@@ -1,99 +1,99 @@
-# FFC Template Node
+# FFC Pay File Receiver
 
-Template to support rapid delivery of microservices for FFC Platform. It contains the configuration needed to deploy a simple Hapi Node server to the Azure Kubernetes Platform.
+## Description
 
-## Usage
+Microservice to transfer, return and acknowledge files from a Dynamics 365 (DAX) Azure File Share to an Azure Blob Storage location.
 
-Create a new repository from this template and run `./rename.js` specifying the new name of the project and the description to use e.g.
-```
-./rename.js ffc-demo-web "Web frontend for demo workstream"
-```
-
-The script will update the following:
-
-* `package.json`: update `name`, `description`, `homepage`
-* `docker-compose.yaml`: update the service name, `image` and `container_name`
-* `docker-compose.test.yaml`: update the service name, `image` and `container_name`
-* `docker-compose.override.yaml`: update the service name, `image` and `container_name`
-* Rename `helm/ffc-template-node`
-* `helm/ffc-template-node/Chart.yaml`: update `description` and `name`
-* `helm/ffc-template-node/values.yaml`: update  `name`, `namespace`, `workstream`, `image`, `containerConfigMap.name`
-* `helm/ffc-template-node/templates/_container.yaml`: update the template name
-* `helm/ffc-template-node/templates/cluster-ip-service.yaml`: update the template name and list parameter of include
-* `helm/ffc-template-node/templates/config-map.yaml`: update the template name and list parameter of include
-* `helm/ffc-template-node/templates/deployment.yaml`: update the template name, list parameter of deployment and container includes
-
-### Notes on automated rename
-
-* The Helm chart deployment values in `helm/ffc-template-node/values.yaml` may need updating depending on the resource needs of your microservice
-* The rename is a one-way operation i.e. currently it doesn't allow the name being changed from to be specified
-* There is some validation on the input to try and ensure the rename is successful, however, it is unlikely to stand up to malicious entry
-* Once the rename has been performed the script can be removed from the repo
-* Should the rename go awry the changes can be reverted via `git clean -df && git checkout -- .`
+This service is part of the [Strategic Payment Service](https://github.com/DEFRA/ffc-pay-core).
 
 ## Prerequisites
-
-- Docker
-- Docker Compose
+### Software required
+- [Azure Service Bus](https://docs.microsoft.com/en-us/azure/service-bus-messaging/)
+- [Docker](https://www.docker.com/)
+- Either:
+  - [Docker Compose](https://docs.docker.com/compose/install/linux/#install-the-plugin-manually)
+  - [Docker-Compose (standalone)](https://docs.docker.com/compose/install/other/)
 
 Optional:
-- Kubernetes
-- Helm
+- [Kubernetes](https://kubernetes.io/)
+- [Helm](https://helm.sh/)
 
-## Running the application
+### Configuration
+#### Azure Service Bus
 
-The application is designed to run in containerised environments, using Docker Compose in development and Kubernetes in production.
+This service depends on a valid Azure Service Bus connection string for
+asynchronous communication.  The following environment variables need to be set
+in any non-production (`!config.isProd`) environment before the Docker
+container is started or tests are run. 
 
-- A Helm chart is provided for production deployments to Kubernetes.
+When deployed into an appropriately configured AKS
+cluster (where [AAD Pod Identity](https://github.com/Azure/aad-pod-identity) is
+configured) the microservice will use AAD Pod Identity.
 
-### Build container image
+| Name | Description |
+| ---| --- |
+| MESSAGE_QUEUE_HOST | Azure Service Bus hostname, e.g. `myservicebus.servicebus.windows.net` |
+| MESSAGE_QUEUE_PASSWORD | Azure Service Bus SAS policy key |
+| MESSAGE_QUEUE_USER | Azure Service Bus SAS policy name, e.g. `RootManageSharedAccessKey`    |
+| MESSAGE_QUEUE_SUFFIX | Developer initials |
+| AZURE_STORAGE_SHARE_ACCOUNT_NAME | Account name for Azure share-folder |
+| AZURE_STORAGE_SHARE_ACCOUNT_KEY | Account key for Azure share-folder |
 
-Container images are built using Docker Compose, with the same images used to run the service with either Docker Compose or Kubernetes.
+##### Message schemas
 
-When using the Docker Compose files in development the local `app` folder will
-be mounted on top of the `app` folder within the Docker container, hiding the CSS files that were generated during the Docker build.  For the site to render correctly locally `npm run build` must be run on the host system.
+All message schemas are fully documented in an [AsyncAPI specification](docs/asyncapi.yaml).
 
 
-By default, the start script will build (or rebuild) images so there will
-rarely be a need to build images manually. However, this can be achieved
-through the Docker Compose
-[build](https://docs.docker.com/compose/reference/build/) command:
+## Setup
+### Docker
+
+Docker Compose can be used to build the container image.  
 
 ```
-# Build container images
 docker-compose build
 ```
 
-### Start
+The service will file watch application and test files so no need to rebuild the container unless a change to an npm package is made.
 
-Use Docker Compose to run service locally.
+## How to start the service
 
-```
-docker-compose up
-```
-
-## Test structure
-
-The tests have been structured into subfolders of `./test` as per the
-[Microservice test approach and repository structure](https://eaflood.atlassian.net/wiki/spaces/FPS/pages/1845396477/Microservice+test+approach+and+repository+structure)
-
-### Running tests
-
-A convenience script is provided to run automated tests in a containerised
-environment. This will rebuild images before running tests via docker-compose,
-using a combination of `docker-compose.yaml` and `docker-compose.test.yaml`.
-The command given to `docker-compose run` may be customised by passing
-arguments to the test script.
-
-Examples:
+The service can be run using the [start](./scripts/start) script.
 
 ```
-# Run all tests
-scripts/test
-
-# Run tests with file watch
-scripts/test -w
+./scripts/start
 ```
+
+This script accepts any Docker Compose [Up](https://docs.docker.com/engine/reference/commandline/compose_up/) argument.
+
+
+## How to stop the service
+
+The service can be stopped using the [stop](./scripts/stop) script.
+
+```
+./scripts/stop
+```
+
+The script accepts any Docker Compose [Down](https://docs.docker.com/engine/reference/commandline/compose_down/) argument.
+
+For example, to stop the service and clear all data volumes.
+
+```
+./scripts/stop -v
+```
+
+## How to test the service
+
+The service can be tested using the [test](./scripts/test) script.
+
+```
+./scripts/test
+```
+
+The script accepts the following arguments:
+
+- `--watch/-w` - run tests with file watching to support Test Driven Development scenarios (TDD)
+- `--debug/-d` - run tests in debug mode.  Same as watch mode but will wait for a debugger to be attached before running tests.
 
 ## CI pipeline
 

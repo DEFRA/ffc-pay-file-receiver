@@ -18,27 +18,35 @@ containerSecret:
   name: ffc-pay-file-receiver-container-secret
   type: Opaque
 
-deployment: {}
+deployment:
+  minReplicas: 1
+  maxReplicas: 1
+  cpuThreshold: 80
+  memoryThreshold: 80
+  minReadySeconds: 0
 
 container:
-  requestMemory: 100Mi
-  requestCpu: 100m
-  limitMemory: 100Mi
-  limitCpu: 100m
-  port: 3000
+  requestMemory: 150Mi
+  requestCpu: 120m
+  limitMemory: 150Mi
+  limitCpu: 120m
+  messageQueueHost: namespace.servicebus.windows.net
+  fileConsumeTopicAddress: ffc-pay-file-consume
+  fileConsumeSubscriptionAddress: ffc-pay-file-consumer
+  azureStorageShareUseConnectionString: true
+  azureStorageConnectionString: dummy
+  azureStorageAccountName: dummy
+  daxStorageConnectionString:
+  daxStorageUseConnectionString: true
+  azureStorageUseConnectionString: false
+  azureStorageCreateContainers: false
+  storageContainer: dax
+  storageFolder: inbound
+  totalRetries: 10
+  retryInterval: 1000
 
-livenessProbe:
-  path: /healthz
-  port: 3000
-  initialDelaySeconds: 20
-  periodSeconds: 10
-  failureThreshold: 3
-  timeoutSeconds: 5
+aadPodIdentity: true
 
-readinessProbe:
-  path: /healthy
-  port: 3000
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  failureThreshold: 3
-  timeoutSeconds: 5
+azureIdentity:
+  clientID: not-a-real-clientID
+  resourceID: not-a-real-resourceID

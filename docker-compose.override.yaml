@@ -8,8 +8,20 @@ services:
     image: ffc-pay-file-receiver-development
     container_name: ffc-pay-file-receiver-development
     ports:
-      - "3000:3000"
-      - "9229:9229"
+      - "9254:9229"
     volumes:
       - ./app:/home/node/app
       - ./package.json:/home/node/package.json
+    environment:
+      AZURE_STORAGE_BLOB_CONNECTION_STRING: DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://ffc-pay-file-receiver-azurite:10000/devstoreaccount1;
+      AZURE_STORAGE_SHARE_ACCOUNT_NAME: ${AZURE_STORAGE_ACCOUNT_NAME:-}${AZURE_STORAGE_SHARE_ACCOUNT_NAME}
+      AZURE_STORAGE_SHARE_CONNECTION_STRING: DefaultEndpointsProtocol=https;AccountName=${AZURE_STORAGE_SHARE_ACCOUNT_NAME};AccountKey=${AZURE_STORAGE_SHARE_ACCOUNT_KEY};EndpointSuffix=core.windows.net
+
+  ffc-pay-file-receiver-azurite:
+    volumes:
+      - azurite_data:/data
+    ports:
+      - "10074:10000"
+
+volumes:
+  azurite_data:
