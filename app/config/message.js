@@ -20,7 +20,7 @@ const mqConfig = {
     host: process.env.MESSAGE_QUEUE_HOST,
     username: process.env.MESSAGE_QUEUE_USER,
     password: process.env.MESSAGE_QUEUE_PASSWORD,
-    useCredentialChain: process.env.NODE_ENV === 'production',
+    useCredentialChain: process.env.MESSAGE_USE_CREDENTIAL_CHAIN,
     appInsights: process.env.NODE_ENV === 'production' ? require('applicationinsights') : undefined
   },
   fileReceiverSubscription: {
