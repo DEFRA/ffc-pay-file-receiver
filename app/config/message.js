@@ -5,6 +5,7 @@ const mqSchema = Joi.object({
     host: Joi.string(),
     username: Joi.string(),
     password: Joi.string(),
+    connectionString: Joi.string(),
     useCredentialChain: Joi.bool().default(false),
     appInsights: Joi.object()
   },
@@ -20,7 +21,8 @@ const mqConfig = {
     host: process.env.MESSAGE_QUEUE_HOST,
     username: process.env.MESSAGE_QUEUE_USER,
     password: process.env.MESSAGE_QUEUE_PASSWORD,
-    useCredentialChain: process.env.NODE_ENV === 'production',
+    connectionString: process.env.MESSAGE_QUEUE_CONNECTION_STRING,
+    useCredentialChain: process.env.MESSAGE_USE_CREDENTIAL_CHAIN,
     appInsights: process.env.NODE_ENV === 'production' ? require('applicationinsights') : undefined
   },
   fileReceiverSubscription: {

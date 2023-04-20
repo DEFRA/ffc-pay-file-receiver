@@ -31,13 +31,15 @@ container:
   limitMemory: 150Mi
   limitCpu: 120m
   messageQueueHost: namespace.servicebus.windows.net
+  messageConnectionString: dummy
+  messageUseCredentialChain: true
   fileConsumeTopicAddress: ffc-pay-file-consume
   fileConsumeSubscriptionAddress: ffc-pay-file-consumer
-  azureStorageShareUseConnectionString: true
   azureStorageConnectionString: dummy
   azureStorageAccountName: dummy
   daxStorageConnectionString:
   daxStorageUseConnectionString: true
+  daxStorageAccountName: dummy
   azureStorageUseConnectionString: false
   azureStorageCreateContainers: false
   storageContainer: dax
