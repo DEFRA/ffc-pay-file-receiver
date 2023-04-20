@@ -8,6 +8,6 @@ module.exports = Joi.object({
   container: Joi.string().default('dax'),
   inboundFolder: Joi.string().default('inbound'),
   useBlobConnectionStr: Joi.boolean().default(false),
-  useShareConnectionStr: Joi.boolean().default(false),
+  useShareConnectionStr: Joi.boolean().default(true),
   createContainers: Joi.boolean().default(true)
 })
