@@ -4,6 +4,8 @@ data:
   NODE_ENV: {{ quote .Values.environment }}
   APPINSIGHTS_CLOUDROLE: {{ quote .Values.name }}
   MESSAGE_QUEUE_HOST: {{ quote .Values.container.messageQueueHost }}
+  MESSAGE_QUEUE_USER: {{ quote .Values.container.messageQueueUser }}
+  MESSAGE_QUEUE_PASSWORD: {{ quote .Values.container.messageQueuePassword }}
   MESSAGE_USE_CREDENTIAL_CHAIN: {{ quote .Values.container.messageUseCredentialChain }}
   {{- if and (.Values.environmentCode) (not .Values.pr) }}
   FILECONSUME_TOPIC_ADDRESS: {{ .Values.container.fileConsumeTopicAddress }}-{{ .Values.environmentCode }}
