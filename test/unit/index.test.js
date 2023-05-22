@@ -1,5 +1,5 @@
-jest.mock('../../app/config/get-storage-config')
-const getStorageConfig = require('../../app/config/get-storage-config')
+jest.mock('../../app/config')
+const config = require('../../app/config')
 
 jest.mock('../../app/messaging')
 const mockMessaging = require('../../app/messaging')
@@ -7,16 +7,19 @@ const mockMessaging = require('../../app/messaging')
 jest.mock('../../app/storage/initialize-container')
 const storage = require('../../app/storage/initialize-container')
 
-const mockStorageConfig = require('../mocks/storage-config')
-
 describe('app', () => {
   beforeEach(() => {
-    getStorageConfig.mockReturnValue(mockStorageConfig)
+    config.enabled = true
     require('../../app')
   })
 
-  test('starts messaging', async () => {
+  test('starts messaging if messaging enabled', async () => {
     expect(mockMessaging.start).toHaveBeenCalled()
+  })
+
+  test('does not start messaging if messaging disabled', async () => {
+    config.enabled = false
+    expect(mockMessaging.start).not.toHaveBeenCalled()
   })
 
   test('initialise storage', async () => {
