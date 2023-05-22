@@ -5,13 +5,15 @@ const getStorageConfig = require('./get-storage-config')
 const schema = Joi.object({
   env: Joi.string().valid('development', 'test', 'production').default('development'),
   totalRetries: Joi.number().default(10),
-  retryInterval: Joi.number().default(1000)
+  retryInterval: Joi.number().default(1000),
+  enabled: Joi.boolean().default(true)
 })
 
 const config = {
   env: process.env.NODE_ENV,
   totalRetries: process.env.TOTAL_RETRIES,
-  retryInterval: process.env.RETRY_INTERVAL
+  retryInterval: process.env.RETRY_INTERVAL,
+  enabled: process.env.ENABLED
 }
 
 const result = schema.validate(config, {
