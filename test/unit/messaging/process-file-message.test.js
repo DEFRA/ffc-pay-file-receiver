@@ -11,7 +11,7 @@ jest.mock('../../../app/processing/transfer-file')
 const transferFile = require('../../../app/processing/transfer-file')
 
 const processFileMessage = require('../../../app/messaging/process-file-message')
-const { VALIDATION } = require('../../../app/errors')
+const { VALIDATION } = require('../../../app/constants/errors')
 
 const mockParsedMessage = require('../../mocks/parsed-message')
 const mockTransferMessage = require('../../mocks/transferred-message')

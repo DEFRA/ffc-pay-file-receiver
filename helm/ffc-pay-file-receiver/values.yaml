@@ -46,7 +46,7 @@ container:
   storageFolder: inbound
   totalRetries: 10
   retryInterval: 1000
-  enabled: true
+  fileReceiverEnabled: true
 
 aadPodIdentity: true
 

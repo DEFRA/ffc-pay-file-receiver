@@ -21,5 +21,5 @@ data:
   RETRY_INTERVAL: {{ quote .Values.container.retryInterval }}
   AZURE_STORAGE_BLOB_ACCOUNT_NAME: {{ quote .Values.container.azureStorageAccountName }}
   AZURE_STORAGE_SHARE_ACCOUNT_NAME: {{ quote .Values.container.daxStorageAccountName }}
-  ENABLED: {{ quote .Values.container.enabled }}
+  FILE_RECEIVER_ENABLED: {{ quote .Values.container.fileReceiverEnabled }}
 {{- end -}}

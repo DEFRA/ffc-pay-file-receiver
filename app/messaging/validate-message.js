@@ -1,5 +1,5 @@
 const schema = require('./schema')
-const { VALIDATION } = require('../errors')
+const { VALIDATION } = require('../constants/errors')
 
 const validateMessage = (message) => {
   const validationResult = schema.validate(message, { abortEarly: false, allowUnknown: true })

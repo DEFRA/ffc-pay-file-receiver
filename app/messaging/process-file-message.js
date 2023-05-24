@@ -1,6 +1,6 @@
 const util = require('util')
 const validateMessage = require('./validate-message')
-const { VALIDATION } = require('../errors')
+const { VALIDATION } = require('../constants/errors')
 const parseMessage = require('./parse-message')
 const transferFile = require('../processing/transfer-file')
 
