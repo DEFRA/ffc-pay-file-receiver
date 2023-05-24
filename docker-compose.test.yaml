@@ -16,3 +16,4 @@ services:
       - ./package.json:/home/node/package.json
     environment:
       AZURE_STORAGE_SHARE_CONNECTION_STRING: not-a-real-connection-string
+      AZURE_STORAGE_SHARE_ACCOUNT_NAME: not-a-real-share-name
