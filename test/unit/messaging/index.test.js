@@ -15,7 +15,6 @@ jest.mock('ffc-messaging', () => {
 })
 
 jest.mock('../../../app/messaging/process-file-message')
-const mockProcessFileMessage = require('../../../app/messaging/process-file-message')
 
 const config = require('../../../app/config')
 
