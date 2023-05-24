@@ -12,6 +12,7 @@ process.on(['SIGTERM', 'SIGINT'], async () => {
 
 module.exports = (async () => {
   if (config.enabled) {
+    console.log('Service is disabled in this environment')
     await initialiseContainers()
     await messaging.start()
   }
