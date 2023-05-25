@@ -7,7 +7,7 @@ const schema = Joi.object({
   env: Joi.string().valid('development', 'test', 'production').default('development'),
   totalRetries: Joi.number().default(30),
   retryInterval: Joi.number().default(2000),
-  enabled: Joi.boolean().default(true)
+  enabled: Joi.boolean().default(false)
 })
 
 const config = {
