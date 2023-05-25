@@ -1,6 +1,7 @@
 const { MessageReceiver } = require('ffc-messaging')
 const config = require('../config')
 const processFileMessage = require('./process-file-message')
+const { keepAlive } = require('../keep-alive')
 let messageReceiver
 
 const start = async () => {
@@ -12,6 +13,7 @@ const start = async () => {
     console.info('Ready to transfer file')
   } else {
     console.info('File transfers are disabled in this environment')
+    keepAlive()
   }
 }
 
