@@ -22,6 +22,7 @@ const { start, stop } = require('../../../app/messaging')
 
 beforeEach(() => {
   jest.clearAllMocks()
+
   config.enabled = true
 })
 

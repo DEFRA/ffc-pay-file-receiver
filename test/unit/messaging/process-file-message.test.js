@@ -10,12 +10,13 @@ const parseMessage = require('../../../app/messaging/parse-message')
 jest.mock('../../../app/processing/transfer-file')
 const transferFile = require('../../../app/processing/transfer-file')
 
-const processFileMessage = require('../../../app/messaging/process-file-message')
-const { VALIDATION } = require('../../../app/constants/errors')
-
 const mockParsedMessage = require('../../mocks/parsed-message')
 const mockTransferMessage = require('../../mocks/transferred-message')
 const mockStorageConfig = require('../../mocks/storage-config')
+
+const { VALIDATION } = require('../../../app/constants/errors')
+
+const processFileMessage = require('../../../app/messaging/process-file-message')
 
 let receiver
 let message
