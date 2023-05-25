@@ -1,4 +1,4 @@
-# FFC Pay File Receiver
+# Payment Hub File Receiver
 
 ## Description
 

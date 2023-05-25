@@ -1,8 +1,8 @@
 const util = require('util')
 const validateMessage = require('./validate-message')
-const { VALIDATION } = require('../errors')
 const parseMessage = require('./parse-message')
 const transferFile = require('../processing/transfer-file')
+const { VALIDATION } = require('../constants/errors')
 
 const processFileMessage = async (message, receiver) => {
   try {

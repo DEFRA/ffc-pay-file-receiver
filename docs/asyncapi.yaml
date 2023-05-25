@@ -1,7 +1,13 @@
-asyncapi: 2.2.0
+asyncapi: 2.6.0
 info:
-  title: FFC Pay File Receiver
-  version: '1.0.0'
+  title: Payment Hub File Receiver
+  version: 1.0.1
+  description: Transfer payment response files from DAX Azure File Share to Azure Blob storage
+channels:
+  ffc-pay-file-Consume:
+    subscribe:
+      message:
+        $ref: "#/components/messages/ConsumeRequest"
 components:
   messages:
     ConsumeRequest:
@@ -12,9 +18,12 @@ components:
           AzureFileShare:
             type: string
             description: Azure File Share storage name
+            example: integrations
           OutputFileName:
             type: string
             description: Name of file to transfer from DAX
+            example: "Return File.csv"
           ProcessingLocation:
             type: string
             description: Network share path to folder containing file
+            example: '\\server\share\folder'
