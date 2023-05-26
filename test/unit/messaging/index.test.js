@@ -16,6 +16,9 @@ jest.mock('ffc-messaging', () => {
 
 jest.mock('../../../app/messaging/process-file-message')
 
+jest.mock('../../../app/keep-alive')
+const { keepAlive: mockKeepAlive } = require('../../../app/keep-alive')
+
 const config = require('../../../app/config')
 
 const { start, stop } = require('../../../app/messaging')
@@ -47,6 +50,12 @@ describe('messaging start', () => {
     config.enabled = false
     await start()
     expect(mockSubscribe).toHaveBeenCalledTimes(0)
+  })
+
+  test('calls keep alive if service disabled', async () => {
+    config.enabled = false
+    await start()
+    expect(mockKeepAlive).toHaveBeenCalledTimes(1)
   })
 })
 
