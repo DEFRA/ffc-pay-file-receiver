@@ -1,4 +1,5 @@
 require('./insights').setup()
+require('log-timestamp')
 const messaging = require('./messaging')
 const { initialiseContainers } = require('./storage/initialize-container')
 
