@@ -32,7 +32,7 @@ container:
   limitCpu: 120m
   messageQueueHost: namespace.servicebus.windows.net
   messageConnectionString: dummy
-  messageUseCredentialChain: true
+  messageUseCredentialChain: false
   fileConsumeTopicAddress: ffc-pay-file-consume
   fileConsumeSubscriptionAddress: ffc-pay-file-consumer
   azureStorageConnectionString: dummy
