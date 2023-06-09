@@ -5,7 +5,7 @@ const mockStorageConfig = require('../../mocks/storage-config')
 const mockDelete = jest.fn()
 
 const mockGetFileClient = {
-  download: jest.fn().mockResolvedValue({ readableStreamBody: mockFileContent }),
+  downloadToBuffer: jest.fn().mockResolvedValue(mockFileContent),
   delete: mockDelete
 }
 const mockGetDirectoryClient = {

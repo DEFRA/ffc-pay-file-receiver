@@ -10,9 +10,9 @@ const download = async (fileName, directoryName, shareName) => {
   const share = shareServiceClient.getShareClient(shareName)
   const directory = share.getDirectoryClient(directoryName)
   const file = directory.getFileClient(fileName)
-  const downloaded = await file.download()
+  const downloaded = await file.downloadToBuffer()
   console.log(`Found ${fileName}`)
-  return downloaded.readableStreamBody
+  return downloaded.toString()
 }
 
 module.exports = getFile
