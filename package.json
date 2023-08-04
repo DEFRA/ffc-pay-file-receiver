@@ -22,7 +22,7 @@
   "dependencies": {
     "@azure/identity": "2.0.5",
     "@azure/storage-blob": "12.13.0",
-    "@azure/storage-file-share": "12.9.0",
+    "@azure/storage-file-share": "12.14.0",
     "@hapi/hapi": "20.2.2",
     "@joi/date": "2.1.0",
     "applicationinsights": "2.5.1",
