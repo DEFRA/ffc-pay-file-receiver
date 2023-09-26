@@ -1,6 +1,6 @@
 {
   "name": "ffc-pay-file-receiver",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Transfer files from DAX",
   "homepage": "https://github.com/DEFRA/ffc-pay-file-receiver",
   "main": "app/index.js",
@@ -33,7 +33,7 @@
   "devDependencies": {
     "jest": "29.3.0",
     "jest-junit": "14.0.1",
-    "nodemon": "2.0.19",
+    "nodemon": "3.0.1",
     "standard": "17.0.0"
   },
   "standard": {
