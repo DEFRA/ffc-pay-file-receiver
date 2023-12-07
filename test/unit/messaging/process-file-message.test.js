@@ -10,6 +10,9 @@ const parseMessage = require('../../../app/messaging/parse-message')
 jest.mock('../../../app/processing/transfer-file')
 const transferFile = require('../../../app/processing/transfer-file')
 
+jest.mock('../../../app/event/send-failure-event')
+const sendFailureEvent = require('../../../app/event/send-failure-event')
+
 const mockParsedMessage = require('../../mocks/parsed-message')
 const mockTransferMessage = require('../../mocks/transferred-message')
 const mockStorageConfig = require('../../mocks/storage-config')
@@ -78,6 +81,11 @@ describe('Process file message', () => {
       await processFileMessage(message, receiver)
       expect(parseMessage).toHaveBeenCalledWith(message.body)
     })
+
+    test('does not send connection failed event', async () => {
+      await processFileMessage(message, receiver)
+      expect(sendFailureEvent).not.toHaveBeenCalled()
+    })
   })
 
   describe('When unsuccessful message is non-validation issue', () => {
@@ -93,6 +101,11 @@ describe('Process file message', () => {
     test('does not dead letter message', async () => {
       await processFileMessage(message, receiver)
       expect(receiver.deadLetterMessage).not.toHaveBeenCalled()
+    })
+
+    test('does send connection failed event', async () => {
+      await processFileMessage(message, receiver)
+      expect(sendFailureEvent).toHaveBeenCalled()
     })
   })
 
@@ -116,6 +129,11 @@ describe('Process file message', () => {
     test('does not complete message', async () => {
       await processFileMessage(message, receiver)
       expect(receiver.completeMessage).not.toHaveBeenCalled()
+    })
+
+    test('does send connection failed event', async () => {
+      await processFileMessage(message, receiver)
+      expect(sendFailureEvent).toHaveBeenCalled()
     })
   })
 })
