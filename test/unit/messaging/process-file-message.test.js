@@ -103,7 +103,7 @@ describe('Process file message', () => {
       expect(receiver.deadLetterMessage).not.toHaveBeenCalled()
     })
 
-    test('does send connection failed event', async () => {
+    test('does send connection failed event if useEvents = true', async () => {
       await processFileMessage(message, receiver)
       expect(sendFailureEvent).toHaveBeenCalled()
     })
