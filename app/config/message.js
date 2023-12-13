@@ -14,6 +14,9 @@ const mqSchema = Joi.object({
     address: Joi.string(),
     topic: Joi.string(),
     type: Joi.string().default('subscription')
+  },
+  eventsTopic: {
+    address: Joi.string()
   }
 })
 
@@ -30,6 +33,9 @@ const mqConfig = {
     address: process.env.FILECONSUME_SUBSCRIPTION_ADDRESS,
     topic: process.env.FILECONSUME_TOPIC_ADDRESS,
     type: 'subscription'
+  },
+  eventsTopic: {
+    address: process.env.EVENTS_TOPIC_ADDRESS
   }
 }
 
@@ -41,8 +47,10 @@ if (mqResult.error) {
   throw new Error(`The message queue config is invalid. ${mqResult.error.message}`)
 }
 
+const eventsTopic = { ...mqResult.value.messageQueue, ...mqResult.value.eventsTopic }
 const fileReceiverSubscription = { ...mqResult.value.messageQueue, ...mqResult.value.fileReceiverSubscription }
 
 module.exports = {
+  eventsTopic,
   fileReceiverSubscription
 }

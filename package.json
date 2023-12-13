@@ -1,6 +1,6 @@
 {
   "name": "ffc-pay-file-receiver",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Transfer files from DAX",
   "homepage": "https://github.com/DEFRA/ffc-pay-file-receiver",
   "main": "app/index.js",
@@ -16,7 +16,8 @@
   "author": "Defra",
   "contributors": [
     "Abidemi Adio abidemi.adio@defra.gov.uk",
-    "John Watson john.watson1@defra.gov.uk"
+    "John Watson john.watson1@defra.gov.uk",
+    "Sam Plackett samuel.plackett@eviden.com"
   ],
   "license": "OGL-UK-3.0",
   "dependencies": {
@@ -27,6 +28,7 @@
     "@joi/date": "2.1.0",
     "applicationinsights": "2.5.1",
     "ffc-messaging": "2.7.0",
+    "ffc-pay-event-publisher": "1.2.0",
     "joi": "17.6.0",
     "log-timestamp": "0.3.0"
   },
