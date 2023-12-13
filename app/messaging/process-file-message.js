@@ -16,7 +16,7 @@ const processFileMessage = async (message, receiver) => {
     await receiver.completeMessage(message)
   } catch (err) {
     console.error('Unable to process message:', err)
-    sendFailureEvent(message.OutputFileName, err)
+    await sendFailureEvent(err, message.OutputFileName)
     if (err.category === VALIDATION) {
       await receiver.deadLetterMessage(message)
     }

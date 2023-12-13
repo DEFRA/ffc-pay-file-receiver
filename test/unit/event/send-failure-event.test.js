@@ -33,28 +33,28 @@ describe('publishing events', () => {
   })
 
   test('should send event if events enabled', async () => {
-    await sendFailureEvent(filename, error)
+    await sendFailureEvent(error, filename)
     expect(mockPublishEvent).toHaveBeenCalled()
   })
 
   test('should not send event if events disabled', async () => {
     config.useEvents = false
-    await sendFailureEvent(filename, error)
+    await sendFailureEvent(error, filename)
     expect(mockPublishEvent).not.toHaveBeenCalled()
   })
 
   test('should send event to correct topic', async () => {
-    await sendFailureEvent(filename, error)
+    await sendFailureEvent(error, filename)
     expect(MockEventPublisher.mock.calls[0][0]).toBe(config.eventsTopic)
   })
 
   test('should raise an event with file-receiver source', async () => {
-    await sendFailureEvent(filename, error)
+    await sendFailureEvent(error, filename)
     expect(mockPublishEvent.mock.calls[0][0].source).toBe(SOURCE)
   })
 
   test('should raise correct event type', async () => {
-    await sendFailureEvent(filename, error)
+    await sendFailureEvent(error, filename)
     expect(mockPublishEvent.mock.calls[0][0].type).toBe(RECEIVER_CONNECTION_FAILED)
   })
 })

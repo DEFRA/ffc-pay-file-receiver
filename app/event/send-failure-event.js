@@ -3,7 +3,7 @@ const { EventPublisher } = require('ffc-pay-event-publisher')
 const { SOURCE } = require('../constants/source')
 const { RECEIVER_CONNECTION_FAILED } = require('../constants/events')
 
-const sendFailureEvent = async (filename, error) => {
+const sendFailureEvent = async (error, filename) => {
   if (config.useEvents) {
     const event = {
       source: SOURCE,

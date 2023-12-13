@@ -9,9 +9,9 @@ const start = async () => {
   if (config.enabled) {
     const messageAction = message => processFileMessage(message, messageReceiver)
     messageReceiver = new MessageReceiver(config.fileReceiverSubscription, messageAction)
-    const messageError = (args) => {
+    const messageError = async (args) => {
       console.error(args.error)
-      sendFailureEvent(undefined, args.error)
+      await sendFailureEvent(args.error)
     }
     await messageReceiver.subscribe(messageError)
 
