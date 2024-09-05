@@ -50,7 +50,7 @@ All message schemas are fully documented in an [AsyncAPI specification](docs/asy
 Docker Compose can be used to build the container image.  
 
 ```
-docker-compose build
+docker compose build
 ```
 
 The service will file watch application and test files so no need to rebuild the container unless a change to an npm package is made.
