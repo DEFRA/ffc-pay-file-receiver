@@ -9,7 +9,7 @@ labels:
   component: service
 
 appInsights:
-  key:
+  connectionString:
 
 containerConfigMap:
   name: ffc-pay-file-receiver-config-map
