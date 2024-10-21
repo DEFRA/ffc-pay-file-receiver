@@ -7,7 +7,7 @@ services:
     container_name: ffc-pay-file-receiver
     environment:
       APPINSIGHTS_CLOUDROLE: ffc-pay-file-receiver-local
-      APPINSIGHTS_INSTRUMENTATIONKEY: ${APPINSIGHTS_INSTRUMENTATIONKEY}
+      APPINSIGHTS_CONNECTIONSTRING: ${APPINSIGHTS_CONNECTIONSTRING}
       MESSAGE_QUEUE_HOST: ${MESSAGE_QUEUE_HOST}
       MESSAGE_QUEUE_PASSWORD: ${MESSAGE_QUEUE_PASSWORD}
       MESSAGE_QUEUE_USER: ${MESSAGE_QUEUE_USER}
@@ -24,7 +24,7 @@ services:
       RETRY_INTERVAL: 10000
 
   ffc-pay-file-receiver-azurite:
-    image: mcr.microsoft.com/azure-storage/azurite:3.23.0
+    image: mcr.microsoft.com/azure-storage/azurite:3.32.0
     command: "azurite-blob --loose --blobHost 0.0.0.0"
     labels:
       com.docker.compose.pay.role: ffc-pay-file-receiver-azurite
