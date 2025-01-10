@@ -1,6 +1,6 @@
 {
   "name": "ffc-pay-file-receiver",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Transfer files from DAX",
   "homepage": "https://github.com/DEFRA/ffc-pay-file-receiver",
   "main": "app/index.js",
