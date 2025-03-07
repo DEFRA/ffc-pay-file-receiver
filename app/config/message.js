@@ -8,7 +8,8 @@ const mqSchema = Joi.object({
     password: Joi.string(),
     connectionString: Joi.string(),
     useCredentialChain: Joi.bool().default(false),
-    appInsights: Joi.object()
+    appInsights: Joi.object(),
+    managedIdentityClientId: Joi.string().optional()
   },
   fileReceiverSubscription: {
     address: Joi.string(),
@@ -27,7 +28,8 @@ const mqConfig = {
     password: process.env.MESSAGE_QUEUE_PASSWORD,
     connectionString: process.env.MESSAGE_QUEUE_CONNECTION_STRING,
     useCredentialChain: process.env.MESSAGE_USE_CREDENTIAL_CHAIN,
-    appInsights: process.env.NODE_ENV === PRODUCTION ? require('applicationinsights') : undefined
+    appInsights: process.env.NODE_ENV === PRODUCTION ? require('applicationinsights') : undefined,
+    managedIdentityClientId: process.env.AZURE_CLIENT_ID
   },
   fileReceiverSubscription: {
     address: process.env.FILECONSUME_SUBSCRIPTION_ADDRESS,
