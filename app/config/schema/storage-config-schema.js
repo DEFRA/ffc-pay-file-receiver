@@ -9,5 +9,6 @@ module.exports = Joi.object({
   inboundFolder: Joi.string().default('inbound'),
   useBlobConnectionStr: Joi.boolean().default(false),
   useShareConnectionStr: Joi.boolean().default(true),
-  createContainers: Joi.boolean().default(true)
+  createContainers: Joi.boolean().default(true),
+  managedIdentityClientId: Joi.string().optional()
 })

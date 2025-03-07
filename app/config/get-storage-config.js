@@ -9,7 +9,8 @@ const getStorageConfig = async () => {
     container: process.env.AZURE_STORAGE_BLOB_CONTAINER,
     inboundFolder: process.env.AZURE_STORAGE_BLOB_FOLDER,
     useBlobConnectionStr: process.env.AZURE_STORAGE_BLOB_USE_CONNECTION_STRING,
-    useShareConnectionStr: process.env.AZURE_STORAGE_SHARE_USE_CONNECTION_STRING
+    useShareConnectionStr: process.env.AZURE_STORAGE_SHARE_USE_CONNECTION_STRING,
+    managedIdentityClientId: process.env.AZURE_CLIENT_ID
   }
   return validateStorageConfig(config)
 }

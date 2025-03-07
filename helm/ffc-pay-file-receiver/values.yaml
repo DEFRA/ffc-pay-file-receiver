@@ -48,7 +48,7 @@ container:
   retryInterval: 1000
   fileReceiverEnabled: true
 
-aadPodIdentity: true
+workloadIdentity: true
 
 azureIdentity:
   clientID: not-a-real-clientID

@@ -1,3 +1,5 @@
 resources:
+  identity: pay-file-receiver
   topics:
-    - name: event
+    - name: ffc-pay-events
+      role: sender
