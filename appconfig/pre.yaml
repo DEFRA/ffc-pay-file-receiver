@@ -21,7 +21,7 @@ secretProviderClass:
         objectType: secret
 
   secretObjects:
-    - secretName: ffc-doc-statement-receiver
+    - secretName: ffc-pay-file-receiver
       type: Opaque
       data:
         - objectName: pre-ffcahwr-appinsights-connectionString
