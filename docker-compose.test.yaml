@@ -19,6 +19,9 @@ services:
     environment:
       AZURE_STORAGE_SHARE_CONNECTION_STRING: not-a-real-connection-string
       AZURE_STORAGE_SHARE_ACCOUNT_NAME: not-a-real-share-name
+      MESSAGE_QUEUE_HOST: servicebus-emulator
+      MESSAGE_QUEUE_USER: RootManageSharedAccessKey
+      MESSAGE_QUEUE_PASSWORD: SAS_KEY_VALUE
 
   sqledge:
     container_name: "sqledge"
