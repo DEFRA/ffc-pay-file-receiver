@@ -7,7 +7,7 @@ container:
   redisHostname: DEVFFCINFRD1001.redis.cache.windows.net
 ingress:
   server: azure.defra.cloud
-  endpoint: ffc-doc-statement-receiver-test
+  endpoint: ffc-pay-file-receiver-test
 secretProviderClass:
   azure:
     keyvaultName: DEVFFCINFKV1001
