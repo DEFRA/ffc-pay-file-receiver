@@ -14,9 +14,7 @@ secretProviderClass:
     objects:
       - objectName: pre-ffcahwr-appinsights-connectionString
         objectType: secret
-      - objectName: pre-daxStorageConnectionString
-        objectType: secret
-      - objectName: pre-messageConnectionString
+      - objectName: pre-ffcpayDaxServiceBusConnectionString
         objectType: secret
 
   secretObjects:
@@ -25,7 +23,5 @@ secretProviderClass:
       data:
         - objectName: pre-ffcahwr-appinsights-connectionString
           key: APPINSIGHTS_CONNECTIONSTRING
-        - objectName: pre-daxStorageConnectionString
-          key: AZURE_STORAGE_SHARE_CONNECTION_STRING
-        - objectName: pre-messageConnectionString
+        - objectName: pre-ffcpayDaxServiceBusConnectionString
           key: MESSAGE_QUEUE_CONNECTION_STRING

@@ -15,7 +15,7 @@ containerConfigMap:
   name: ffc-pay-file-receiver-config-map
 
 containerSecret:
-  name: ffc-pay-file-receiver-container-secret
+  name: ffc-pay-file-receiver
   type: Opaque
 
 deployment:
