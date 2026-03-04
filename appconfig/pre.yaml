@@ -16,6 +16,8 @@ secretProviderClass:
         objectType: secret
       - objectName: pre-ffcpayDaxServiceBusConnectionString
         objectType: secret
+      - objectName: pre-ffcpayDaxStorageConnectionString
+        objectType: secret
 
   secretObjects:
     - secretName: ffc-pay-file-receiver
@@ -25,3 +27,5 @@ secretProviderClass:
           key: APPINSIGHTS_CONNECTIONSTRING
         - objectName: pre-ffcpayDaxServiceBusConnectionString
           key: MESSAGE_QUEUE_CONNECTION_STRING
+        - objectName: pre-ffcpayDaxStorageConnectionString
+          key: AZURE_STORAGE_SHARE_CONNECTION_STRING
