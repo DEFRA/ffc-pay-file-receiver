@@ -2,7 +2,7 @@
 environment: production
 environmentCode: test
 container:
-  azureStorageAccountName: testffcdocst1001
+  azureStorageAccountName: testffcpayst1001
   messageQueueHost: predaxinfsb1241.servicebus.windows.net
   redisHostname: DEVFFCINFRD1001.redis.cache.windows.net
 ingress:
