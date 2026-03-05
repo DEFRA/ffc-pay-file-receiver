@@ -1,6 +1,18 @@
 resources:
   identity: pay-file-receiver
-  topics:
-    - name: ffc-pay-events
-      roles: 
+  service_bus:
+    topics:
+      - name: ffc-pay-events
+        defaultMessageTimeToLive: P3650D
+        duplicateDetectionHistoryTimeWindow: PT10M30S
+        requiresDuplicateDetection: true
+        roles: 
         - name: sender
+  storage_accounts:
+    - name: pay
+      containers:
+        - name: batch
+          roles:
+            - name: blobContributor
+      roles:
+        - name: storageAccountContributor
