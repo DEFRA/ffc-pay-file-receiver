@@ -4,3 +4,11 @@ resources:
     - name: ffc-pay-events
       roles: 
         - name: sender
+  storage_accounts:
+    - name: pay
+      containers:
+        - name: batch
+          roles:
+            - name: blobContributor
+      roles:
+        - name: storageAccountContributor
