@@ -19,8 +19,8 @@
   "contributors": [
     "Abidemi Adio abidemi.adio@defra.gov.uk",
     "John Watson john.watson1@defra.gov.uk",
-    "Sam Plackett samuel.plackett@eviden.com",
-    "Oliver Lewington oliver.lewington@eviden.com"
+    "Sam Plackett samuel.plackett@atos.net",
+    "Oliver Lewington oliver.lewington@atos.net"
   ],
   "license": "OGL-UK-3.0",
   "dependencies": {
@@ -30,8 +30,8 @@
     "@hapi/hapi": "20.2.2",
     "@joi/date": "2.1.0",
     "applicationinsights": "2.9.6",
-    "ffc-messaging": "2.10.1",
-    "ffc-pay-event-publisher": "1.2.0",
+    "ffc-messaging": "2.10.4",
+    "ffc-pay-event-publisher": "1.2.1",
     "joi": "17.6.0",
     "log-timestamp": "0.3.0"
   },
