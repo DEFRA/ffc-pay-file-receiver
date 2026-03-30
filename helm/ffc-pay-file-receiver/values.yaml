@@ -47,7 +47,8 @@ container:
   storageFolder: inbound
   totalRetries: 10
   retryInterval: 1000
-  fileReceiverEnabled: true
+  fileReceiverEnabled: false
+  shareConnectionString: dummy
 
 workloadIdentity: true
 
