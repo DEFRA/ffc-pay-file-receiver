@@ -36,3 +36,16 @@ extends:
     branchDeployment: ${{ parameters.branchDeployment }}
     sndDeployment: ${{ parameters.sndDeployment }}
     failOnThreshold: moderate  # Optional: moderate (default), low, high, critical
+    variableGroupName: ffc-pay-file-receiver-env-var
+    pr_params:
+      container.fileReceiverEnabled: $(pr_fileReceiverEnabled)
+    snd2_params:
+      container.fileReceiverEnabled: $(snd2_fileReceiverEnabled)
+    dev_params:
+      container.fileReceiverEnabled: $(dev_fileReceiverEnabled)
+    test_params:
+      container.fileReceiverEnabled: $(test_fileReceiverEnabled)
+    pre_params:
+      container.fileReceiverEnabled: $(pre_fileReceiverEnabled)
+    prd_params:
+      container.fileReceiverEnabled: $(prd_fileReceiverEnabled)
