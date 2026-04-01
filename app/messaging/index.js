@@ -2,7 +2,6 @@ const { MessageReceiver } = require('ffc-messaging')
 const config = require('../config')
 const processFileMessage = require('./process-file-message')
 const { keepAlive } = require('../keep-alive')
-const { sendFailureEvent } = require('../event')
 let messageReceiver
 
 const start = async () => {
