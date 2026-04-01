@@ -22,7 +22,6 @@ const processFileMessage = async (message, receiver) => {
     console.log('[processFileMessage] File processed successfully')
 
     await receiver.completeMessage(message)
-
   } catch (err) {
     console.error('[processFileMessage] Processing failed:', {
       message: err.message,
