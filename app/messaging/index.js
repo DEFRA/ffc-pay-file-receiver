@@ -9,11 +9,8 @@ const start = async () => {
   if (config.enabled) {
     const messageAction = message => processFileMessage(message, messageReceiver)
     messageReceiver = new MessageReceiver(config.fileReceiverSubscription, messageAction)
-    const messageError = async (args) => {
-      console.error(args.error)
-      await sendFailureEvent(args.error)
-    }
-    await messageReceiver.subscribe(messageError)
+
+    await messageReceiver.subscribe()
 
     console.info('Ready to transfer file')
   } else {
