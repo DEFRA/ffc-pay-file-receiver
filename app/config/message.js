@@ -42,7 +42,7 @@ const mqConfig = {
     host: process.env.D365_MESSAGE_QUEUE_HOST,
     username: process.env.D365_MESSAGE_QUEUE_USER,
     password: process.env.D365_MESSAGE_QUEUE_PASSWORD,
-    connectionString: process.env.D365_MESSAGE_QUEUE_CONNECTION_STRING,
+    connectionString: process.env.MESSAGE_QUEUE_CONNECTION_STRING,
     useCredentialChain: process.env.D365_MESSAGE_USE_CREDENTIAL_CHAIN,
     appInsights: process.env.NODE_ENV === PRODUCTION ? require('applicationinsights') : undefined,
     managedIdentityClientId: process.env.D365_AZURE_CLIENT_ID

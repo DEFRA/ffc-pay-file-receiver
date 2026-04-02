@@ -10,7 +10,7 @@ const getStorageConfig = async () => {
     inboundFolder: process.env.AZURE_STORAGE_BLOB_FOLDER,
     useBlobConnectionStr: process.env.AZURE_STORAGE_BLOB_USE_CONNECTION_STRING,
     useShareConnectionStr: process.env.AZURE_STORAGE_SHARE_USE_CONNECTION_STRING,
-    managedIdentityClientId: process.env.D365_AZURE_CLIENT_ID,
+    managedIdentityClientId: process.env.AZURE_CLIENT_ID,
     enabled: process.env.FILE_RECEIVER_ENABLED
   }
   return validateStorageConfig(config)
