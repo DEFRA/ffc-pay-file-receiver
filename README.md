@@ -32,9 +32,9 @@ configured) the microservice will use AAD Pod Identity.
 
 | Name | Description |
 | ---| --- |
-| MESSAGE_QUEUE_HOST | Azure Service Bus hostname, e.g. `myservicebus.servicebus.windows.net` |
-| MESSAGE_QUEUE_PASSWORD | Azure Service Bus SAS policy key |
-| MESSAGE_QUEUE_USER | Azure Service Bus SAS policy name, e.g. `RootManageSharedAccessKey`    |
+| D365_MESSAGE_QUEUE_HOST | Azure Service Bus hostname, e.g. `myservicebus.servicebus.windows.net` |
+| D365_MESSAGE_QUEUE_PASSWORD | Azure Service Bus SAS policy key |
+| D365_MESSAGE_QUEUE_USER | Azure Service Bus SAS policy name, e.g. `RootManageSharedAccessKey`    |
 | MESSAGE_QUEUE_SUFFIX | Developer initials |
 | AZURE_STORAGE_SHARE_ACCOUNT_NAME | Account name for Azure share-folder |
 | AZURE_STORAGE_SHARE_ACCOUNT_KEY | Account key for Azure share-folder |

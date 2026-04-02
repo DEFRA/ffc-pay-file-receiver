@@ -2,7 +2,8 @@
 environment: production
 environmentCode: pre
 container:
-  messageQueueHost: predaxinfsb1241.servicebus.windows.net
+  messageQueueHost: PREFFCINFSB1001.servicebus.windows.net
+  d365MessageQueueHost: predaxinfsb1241.servicebus.windows.net
   azureStorageAccountName: preffcpayst1001
   redisHostname: PREFFCINFRD1001.redis.cache.windows.net
 ingress:
@@ -26,6 +27,6 @@ secretProviderClass:
         - objectName: pre-ffcahwr-appinsights-connectionString
           key: APPINSIGHTS_CONNECTIONSTRING
         - objectName: pre-ffcpayDaxServiceBusConnectionString
-          key: MESSAGE_QUEUE_CONNECTION_STRING
+          key: D365_MESSAGE_QUEUE_CONNECTION_STRING
         - objectName: pre-ffcpayDaxStorageConnectionString
           key: AZURE_STORAGE_SHARE_CONNECTION_STRING

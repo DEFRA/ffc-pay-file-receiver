@@ -2,18 +2,14 @@ const { MessageReceiver } = require('ffc-messaging')
 const config = require('../config')
 const processFileMessage = require('./process-file-message')
 const { keepAlive } = require('../keep-alive')
-const { sendFailureEvent } = require('../event')
 let messageReceiver
 
 const start = async () => {
   if (config.enabled) {
     const messageAction = message => processFileMessage(message, messageReceiver)
     messageReceiver = new MessageReceiver(config.fileReceiverSubscription, messageAction)
-    const messageError = async (args) => {
-      console.error(args.error)
-      await sendFailureEvent(args.error)
-    }
-    await messageReceiver.subscribe(messageError)
+
+    await messageReceiver.subscribe()
 
     console.info('Ready to transfer file')
   } else {
