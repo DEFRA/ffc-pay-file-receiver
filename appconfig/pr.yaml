@@ -4,6 +4,7 @@ environmentCode: snd
 container:
   azureStorageAccountName: snd2ffcpayst2001
   messageQueueHost: SNDFFCINFSB2001.servicebus.windows.net
+  d365MessageQueueHost: SNDFFCINFSB2001.servicebus.windows.net
   redisHostname: SNDFFCINFRD2001.redis.cache.windows.net
   fileConsumeTopicAddress: queue:ffc-pay-file-consume
 ingress:

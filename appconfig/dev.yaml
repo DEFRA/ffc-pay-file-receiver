@@ -3,8 +3,10 @@ environment: production
 environmentCode: dev
 container:
   azureStorageAccountName: devffcpayst1001
-  messageQueueHost: devdaxinfsb1241.servicebus.windows.net
+  d365MessageQueueHost: devdaxinfsb1241.servicebus.windows.net
+  messageQueueHost: DEVFFCINFSB1001.servicebus.windows.net
   redisHostname: DEVFFCINFRD1001.redis.cache.windows.net
+  
 ingress:
   server: azure.defra.cloud
   endpoint: ffc-pay-file-receiver-dev

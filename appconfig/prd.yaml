@@ -2,7 +2,8 @@
 environment: production
 environmentCode: prd
 container:
-  messageQueueHost: prddaxinfsb1241.servicebus.windows.net
+  messageQueueHost: PRDFFCINFSB1001.servicebus.windows.net
+  d365MessageQueueHost: prddaxinfsb1241.servicebus.windows.net
   azureStorageAccountName: prdffcpayst1001
   redisHostname: PRDFFCINFRD1001.redis.cache.windows.net
 ingress:

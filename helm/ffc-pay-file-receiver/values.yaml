@@ -31,7 +31,8 @@ container:
   limitMemory: 150Mi
   limitCpu: 120m
   messageQueueHost: namespace.servicebus.windows.net
-  messageConnectionString: dummy
+  d365MessageQueueHost: namespace.servicebus.windows.net
+  d365MessageConnectionString: dummy
   messageUseCredentialChain: false
   fileConsumeTopicAddress: ffc-pay-file-consume
   fileConsumeSubscriptionAddress: ffc-pay-file-consumer
@@ -46,7 +47,8 @@ container:
   storageFolder: inbound
   totalRetries: 10
   retryInterval: 1000
-  fileReceiverEnabled: true
+  fileReceiverEnabled: false
+  shareConnectionString: dummy
 
 workloadIdentity: true
 

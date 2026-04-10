@@ -3,6 +3,14 @@ const { PRODUCTION } = require('../constants/environments')
 
 const mqSchema = Joi.object({
   messageQueue: {
+    host: Joi.string().required(),
+    username: Joi.string(),
+    password: Joi.string(),
+    useCredentialChain: Joi.bool().default(false),
+    appInsights: Joi.object(),
+    managedIdentityClientId: Joi.string().optional()
+  },
+  d365MessageQueue: {
     host: Joi.string(),
     username: Joi.string(),
     password: Joi.string(),
@@ -26,10 +34,18 @@ const mqConfig = {
     host: process.env.MESSAGE_QUEUE_HOST,
     username: process.env.MESSAGE_QUEUE_USER,
     password: process.env.MESSAGE_QUEUE_PASSWORD,
-    connectionString: process.env.MESSAGE_QUEUE_CONNECTION_STRING,
-    useCredentialChain: process.env.MESSAGE_USE_CREDENTIAL_CHAIN,
-    appInsights: process.env.NODE_ENV === PRODUCTION ? require('applicationinsights') : undefined,
+    useCredentialChain: process.env.NODE_ENV === 'production',
+    appInsights: process.env.NODE_ENV === 'production' ? require('applicationinsights') : undefined,
     managedIdentityClientId: process.env.AZURE_CLIENT_ID
+  },
+  d365MessageQueue: {
+    host: process.env.D365_MESSAGE_QUEUE_HOST,
+    username: process.env.D365_MESSAGE_QUEUE_USER,
+    password: process.env.D365_MESSAGE_QUEUE_PASSWORD,
+    connectionString: process.env.MESSAGE_QUEUE_CONNECTION_STRING,
+    useCredentialChain: process.env.D365_MESSAGE_USE_CREDENTIAL_CHAIN,
+    appInsights: process.env.NODE_ENV === PRODUCTION ? require('applicationinsights') : undefined,
+    managedIdentityClientId: process.env.D365_AZURE_CLIENT_ID
   },
   fileReceiverSubscription: {
     address: process.env.FILECONSUME_SUBSCRIPTION_ADDRESS,
@@ -50,7 +66,7 @@ if (mqResult.error) {
 }
 
 const eventsTopic = { ...mqResult.value.messageQueue, ...mqResult.value.eventsTopic }
-const fileReceiverSubscription = { ...mqResult.value.messageQueue, ...mqResult.value.fileReceiverSubscription }
+const fileReceiverSubscription = { ...mqResult.value.d365MessageQueue, ...mqResult.value.fileReceiverSubscription }
 
 module.exports = {
   eventsTopic,
