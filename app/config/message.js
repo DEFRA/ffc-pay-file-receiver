@@ -1,5 +1,4 @@
 const Joi = require('joi')
-const { PRODUCTION } = require('../constants/environments')
 
 const mqSchema = Joi.object({
   messageQueue: {
