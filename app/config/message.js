@@ -1,5 +1,4 @@
 const Joi = require('joi')
-const { PRODUCTION } = require('../constants/environments')
 
 const mqSchema = Joi.object({
   messageQueue: {
@@ -7,7 +6,6 @@ const mqSchema = Joi.object({
     username: Joi.string(),
     password: Joi.string(),
     useCredentialChain: Joi.bool().default(false),
-    appInsights: Joi.object(),
     managedIdentityClientId: Joi.string().optional()
   },
   d365MessageQueue: {
@@ -16,7 +14,6 @@ const mqSchema = Joi.object({
     password: Joi.string(),
     connectionString: Joi.string(),
     useCredentialChain: Joi.bool().default(false),
-    appInsights: Joi.object(),
     managedIdentityClientId: Joi.string().optional()
   },
   fileReceiverSubscription: {
@@ -35,7 +32,6 @@ const mqConfig = {
     username: process.env.MESSAGE_QUEUE_USER,
     password: process.env.MESSAGE_QUEUE_PASSWORD,
     useCredentialChain: process.env.NODE_ENV === 'production',
-    appInsights: process.env.NODE_ENV === 'production' ? require('applicationinsights') : undefined,
     managedIdentityClientId: process.env.AZURE_CLIENT_ID
   },
   d365MessageQueue: {
@@ -44,7 +40,6 @@ const mqConfig = {
     password: process.env.D365_MESSAGE_QUEUE_PASSWORD,
     connectionString: process.env.MESSAGE_QUEUE_CONNECTION_STRING,
     useCredentialChain: process.env.D365_MESSAGE_USE_CREDENTIAL_CHAIN,
-    appInsights: process.env.NODE_ENV === PRODUCTION ? require('applicationinsights') : undefined,
     managedIdentityClientId: process.env.D365_AZURE_CLIENT_ID
   },
   fileReceiverSubscription: {
