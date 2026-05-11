@@ -1,4 +1,3 @@
-const util = require('util')
 const validateMessage = require('./validate-message')
 const parseMessage = require('./parse-message')
 const transferFile = require('../processing/transfer-file')
@@ -8,9 +7,9 @@ const { sendFailureEvent } = require('../event')
 const processFileMessage = async (message, receiver) => {
   try {
     const fileMessage = message.body
-    console.log('Message received:', util.inspect(fileMessage, false, null, true))
     validateMessage(fileMessage)
     const { fileName, directoryName, shareName } = parseMessage(fileMessage)
+    console.log(`Message received: ${fileName} from ${shareName}`)
     await transferFile(fileName, directoryName, shareName)
 
     await receiver.completeMessage(message)
