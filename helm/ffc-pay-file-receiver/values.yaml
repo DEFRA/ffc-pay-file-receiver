@@ -49,6 +49,7 @@ container:
   retryInterval: 1000
   fileReceiverEnabled: false
   shareConnectionString: dummy
+  azureLogLevel: error
 
 workloadIdentity: true
 
