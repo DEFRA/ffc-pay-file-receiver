@@ -1,73 +1,127 @@
-const mockSubscribe = jest.fn()
-const mockCloseConnection = jest.fn()
-
-const MockMessageReceiver = jest.fn().mockImplementation(() => {
-  return {
-    subscribe: mockSubscribe,
-    closeConnection: mockCloseConnection
-  }
-})
-
-jest.mock('ffc-messaging', () => {
-  return {
-    MessageReceiver: MockMessageReceiver
-  }
-})
+jest.mock('../../../app/messaging/service-bus', () => ({
+  createServiceBusClient: (...args) => mockCreateServiceBusClient(...args),
+  createReceiver: (...args) => mockCreateReceiver(...args),
+  subscribeReceiver: (...args) => mockSubscribeReceiver(...args),
+  closeSenders: (...args) => mockCloseSenders(...args)
+}))
 
 jest.mock('../../../app/messaging/process-file-message')
 
 jest.mock('../../../app/keep-alive')
-const { keepAlive: mockKeepAlive } = require('../../../app/keep-alive')
 
-const config = require('../../../app/config')
+jest.mock('../../../app/config')
 
-const { start, stop } = require('../../../app/messaging')
+const mockCreateServiceBusClient = jest.fn()
+const mockCreateReceiver = jest.fn()
+const mockSubscribeReceiver = jest.fn()
+const mockCloseSenders = jest.fn()
+const mockSbClientClose = jest.fn()
+const mockReceiver = { close: jest.fn() }
 
-beforeEach(() => {
-  jest.clearAllMocks()
+describe('messaging', () => {
+  let messaging
+  let config
+  let mockKeepAlive
+  let processFileMessage
 
-  config.enabled = true
-})
+  beforeEach(() => {
+    jest.resetModules()
+    jest.clearAllMocks()
 
-describe('messaging start', () => {
-  test('creates new message receiver if service enabled', async () => {
-    await start()
-    expect(MockMessageReceiver).toHaveBeenCalledTimes(1)
+    config = require('../../../app/config')
+    mockKeepAlive = require('../../../app/keep-alive').keepAlive
+    processFileMessage = require('../../../app/messaging/process-file-message')
+    messaging = require('../../../app/messaging')
+
+    config.enabled = true
+    config.fileReceiverSubscription = {
+      address: 'test-subscription',
+      topic: 'test-topic',
+      type: 'subscription'
+    }
+    mockCreateServiceBusClient.mockReturnValue({ close: mockSbClientClose })
+    mockCreateReceiver.mockReturnValue(mockReceiver)
   })
 
-  test('does not create new message receiver if service disabled', async () => {
-    config.enabled = false
-    await start()
-    expect(MockMessageReceiver).toHaveBeenCalledTimes(0)
+  describe('start', () => {
+    test('creates Service Bus client if service enabled', async () => {
+      await messaging.start()
+      expect(mockCreateServiceBusClient).toHaveBeenCalledTimes(1)
+      expect(mockCreateServiceBusClient).toHaveBeenCalledWith(config.fileReceiverSubscription)
+    })
+
+    test('creates receiver if service enabled', async () => {
+      await messaging.start()
+      expect(mockCreateReceiver).toHaveBeenCalledTimes(1)
+      expect(mockCreateReceiver).toHaveBeenCalledWith(expect.any(Object), config.fileReceiverSubscription)
+    })
+
+    test('does not create Service Bus client if service disabled', async () => {
+      config.enabled = false
+      await messaging.start()
+      expect(mockCreateServiceBusClient).not.toHaveBeenCalled()
+    })
+
+    test('does not create receiver if service disabled', async () => {
+      config.enabled = false
+      await messaging.start()
+      expect(mockCreateReceiver).not.toHaveBeenCalled()
+    })
+
+    test('subscribes receiver if service enabled', async () => {
+      await messaging.start()
+      expect(mockSubscribeReceiver).toHaveBeenCalledTimes(1)
+      expect(mockSubscribeReceiver).toHaveBeenCalledWith(
+        mockReceiver,
+        expect.any(Function),
+        expect.any(Function),
+        config.fileReceiverSubscription
+      )
+    })
+
+    test('does not subscribe receiver if service disabled', async () => {
+      config.enabled = false
+      await messaging.start()
+      expect(mockSubscribeReceiver).not.toHaveBeenCalled()
+    })
+
+    test('calls keep alive if service disabled', async () => {
+      config.enabled = false
+      await messaging.start()
+      expect(mockKeepAlive).toHaveBeenCalledTimes(1)
+    })
+
+    test('message action calls processFileMessage with message and receiver', async () => {
+      await messaging.start()
+      const action = mockSubscribeReceiver.mock.calls[0][1]
+      const message = { body: {} }
+      await action(message, mockReceiver)
+      expect(processFileMessage).toHaveBeenCalledWith(message, mockReceiver)
+    })
   })
 
-  test('subscribes to message receiver if service enabled', async () => {
-    await start()
-    expect(mockSubscribe).toHaveBeenCalledTimes(1)
-  })
+  describe('stop', () => {
+    test('closes Service Bus client if started', async () => {
+      await messaging.start()
+      await messaging.stop()
+      expect(mockSbClientClose).toHaveBeenCalledTimes(1)
+    })
 
-  test('does not subscribe to message receiver if service disabled', async () => {
-    config.enabled = false
-    await start()
-    expect(mockSubscribe).toHaveBeenCalledTimes(0)
-  })
+    test('calls closeSenders', async () => {
+      await messaging.stop()
+      expect(mockCloseSenders).toHaveBeenCalledTimes(1)
+    })
 
-  test('calls keep alive if service disabled', async () => {
-    config.enabled = false
-    await start()
-    expect(mockKeepAlive).toHaveBeenCalledTimes(1)
-  })
-})
+    test('does not throw if client close fails', async () => {
+      await messaging.start()
+      mockSbClientClose.mockRejectedValue(new Error('close failed'))
+      await expect(messaging.stop()).resolves.not.toThrow()
+    })
 
-describe('messaging stop', () => {
-  test('closes connection if service enabled', async () => {
-    await stop()
-    expect(mockCloseConnection).toHaveBeenCalledTimes(1)
-  })
-
-  test('does not close connection if service disabled', async () => {
-    config.enabled = false
-    await stop()
-    expect(mockCloseConnection).toHaveBeenCalledTimes(0)
+    test('handles stop when start has not been called', async () => {
+      await messaging.stop()
+      expect(mockSbClientClose).not.toHaveBeenCalled()
+      expect(mockCloseSenders).toHaveBeenCalledTimes(1)
+    })
   })
 })
